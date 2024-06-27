@@ -5,10 +5,10 @@ export default function Home() {
   return (
     <>
       <DefaultLayout>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4 xl:grid-cols-4 2xl:gap-6 mt-2">
           {/* <div className="grid gap-4 lg:grid-cols-12 xl:grid-cols-12"> */}
           {/* <div className="md:col-span-12 lg:col-span-6 xl:col-span-3"> */}
-          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
             {/* <div className="bg-white border p-2 rounded-md mb-0 shadow hover:bg-violet-300 hover:text-white hover:scale-110 duration-150"> */}
             <div className="flex justify-between mb-3">
               <div>
@@ -24,7 +24,7 @@ export default function Home() {
             {/* </div> */}
           </div>
           {/* <div className="md:col-span-12 lg:col-span-6 xl:col-span-3"> */}
-          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
             {/* <div className="bg-white border p-2 rounded-md mb-0 shadow hover:bg-violet-300 hover:text-white hover:scale-110 duration-150"> */}
             <div className="flex justify-between mb-3">
               <div>
@@ -40,7 +40,7 @@ export default function Home() {
             {/* </div> */}
           </div>
           {/* <div className="md:col-span-12 lg:col-span-6 xl:col-span-3"> */}
-          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
             {/* <div className="bg-white border p-2 rounded-md mb-0 shadow hover:bg-violet-300 hover:text-white hover:scale-110 duration-150"> */}
             <div className="flex justify-between mb-3">
               <div>
@@ -56,7 +56,7 @@ export default function Home() {
             {/* </div> */}
           </div>
           {/* <div className="md:col-span-12 lg:col-span-6 xl:col-span-3"> */}
-          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+          <div className="p-2 rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
             {/* <div className="bg-white border p-2 rounded-md mb-0 shadow hover:bg-violet-300 hover:text-white hover:scale-110 duration-150"> */}
             <div className="flex justify-between mb-3">
               <div>

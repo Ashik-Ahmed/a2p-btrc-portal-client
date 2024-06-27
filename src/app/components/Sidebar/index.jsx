@@ -43,8 +43,8 @@ const menuGroups = [
                     </svg>
                 ),
                 label: "Dashboard",
-                route: "#",
-                children: [{ label: "eCommerce", route: "/" }],
+                route: "/",
+
             },
             {
                 icon: (
@@ -62,8 +62,8 @@ const menuGroups = [
                         />
                     </svg>
                 ),
-                label: "Calendar",
-                route: "/calendar",
+                label: "Home",
+                route: "/home",
             },
             {
                 icon: (
@@ -326,11 +326,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return (
         <ClickOutside onClick={() => setSidebarOpen(false)}>
             <aside
-                className={`absolute left-0 top-0 z-50 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gray-900 text-white duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`absolute left-0 top-0 z-50 flex h-screen w-64 flex-col overflow-y-hidden bg-gray-900 text-white duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
                 {/* <!-- SIDEBAR HEADER --> */}
-                <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+                <div className="flex items-center justify-between gap-2 px-2 py-5.5 lg:py-6.5">
                     <Link href="/">
                         <Image
                             width={176}
@@ -366,10 +366,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
                 <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
                     {/* <!-- Sidebar Menu --> */}
-                    <nav className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
+                    <nav className="mt-5 px-2 py-4 lg:mt-9 lg:px-2">
                         {menuGroups.map((group, groupIndex) => (
                             <div key={groupIndex}>
-                                <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+                                <h3 className="mb-4 ml-4 text-sm font-semibold text-gray-400">
                                     {group.name}
                                 </h3>
 

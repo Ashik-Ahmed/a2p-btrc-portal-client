@@ -1,6 +1,5 @@
 import { auth } from '@/auth'
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
 import React from 'react'
 import Logout from '../components/Logout/Logout';
 
@@ -8,9 +7,6 @@ const HomePage = async () => {
 
     const session = await auth();
 
-    if (!session?.user) {
-        redirect('/auth/signin')
-    }
 
     return (
         <div className='text-center flex flex-col items-center justify-center'>
@@ -31,7 +27,7 @@ const HomePage = async () => {
                 )
             }
 
-            <Logout />
+            {session?.user && <Logout />}
         </div>
     )
 }

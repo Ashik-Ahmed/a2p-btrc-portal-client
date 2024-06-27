@@ -5,6 +5,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import "primereact/resources/primereact.min.css";
 import NextAuthSessionProvider from "@/utils/sessionProvider";
 import { PrimeReactProvider } from 'primereact/api';
+import DefaultLayout from "./components/Layout/DefaultLayout";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <NextAuthSessionProvider>
         <PrimeReactProvider>
-          <body className={inter.className}>{children}</body>
+          <body className={inter.className}>
+            <DefaultLayout>{children}</DefaultLayout>
+          </body>
         </PrimeReactProvider>
       </NextAuthSessionProvider>
     </html>

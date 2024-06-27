@@ -364,7 +364,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </div>
                 {/* <!-- SIDEBAR HEADER --> */}
 
-                <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+                <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear"
+                    style={{
+                        msOverflowStyle: 'none', // IE and Edge
+                        scrollbarWidth: 'none', // Firefox
+                        overflowY: 'auto',
+                        WebkitOverflowScrolling: 'touch', // for smooth scrolling on iOS
+                    }}
+                >
+                    <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none; // Safari and Chrome
+        }
+      `}</style>
                     {/* <!-- Sidebar Menu --> */}
                     <nav className="mt-5 px-2 py-4 lg:mt-9 lg:px-2">
                         {menuGroups.map((group, groupIndex) => (

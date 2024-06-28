@@ -1,7 +1,7 @@
-import { auth } from '@/auth'
 import Image from 'next/image';
 import React from 'react'
 import Logout from '../components/Logout/Logout';
+import { auth } from '../../auth';
 
 const HomePage = async () => {
 

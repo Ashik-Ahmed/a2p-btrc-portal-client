@@ -1,5 +1,6 @@
-import { doSocialLogin } from '@/app/serverActions/authActions'
+
 import React from 'react'
+import { doSocialLogin } from '../../serverActions/authActions'
 
 const SocialLogin = () => {
     return (

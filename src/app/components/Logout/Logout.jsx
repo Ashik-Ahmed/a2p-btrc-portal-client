@@ -1,5 +1,5 @@
-import { doLogout } from '@/app/serverActions/authActions'
 import React from 'react'
+import doLogout from '../../serverActions/authActions'
 
 const Logout = () => {
     return (

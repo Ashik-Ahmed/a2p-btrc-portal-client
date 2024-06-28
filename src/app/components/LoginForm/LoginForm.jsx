@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 import SocialLogin from '../SocialLogin/SocialLogin'
-import { doCredentialLogin } from '@/app/serverActions/authActions'
 import { useRouter } from 'next/navigation'
+import { doCredentialLogin } from '../../serverActions/authActions'
 
 const LoginForm = () => {
 

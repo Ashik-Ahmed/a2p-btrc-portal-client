@@ -21,7 +21,6 @@ export default async function RootLayout({ children }) {
   const pathname = headersList.get('x-pathname') || '/'; // Default to '/' if header is not found
   const isAuthPage = pathname.includes('/signin');
 
-
   return (
     <html lang="en">
       <NextAuthSessionProvider>

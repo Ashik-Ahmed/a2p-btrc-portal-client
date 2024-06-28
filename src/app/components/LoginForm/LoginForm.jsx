@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import SocialLogin from '../SocialLogin/SocialLogin'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { doCredentialLogin } from '../../serverActions/authActions'
 
 const LoginForm = () => {
@@ -15,20 +14,21 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         setLoading(true)
+        setLoginError(null)
 
         try {
             const formData = new FormData(e.currentTarget)
 
             const response = await doCredentialLogin(formData);
-            console.log(response);
+            console.log("credential login response: ", response);
 
             if (!!response?.error) {
                 setLoginError(response?.error?.message)
             }
             else {
-                router.push("/home")
+                router.push('/')
+                // redirect('/')
             }
-
         } catch (error) {
             console.log(error);
             setLoginError("Wrong Credentials")
@@ -39,10 +39,10 @@ const LoginForm = () => {
 
     return (
         <>
-            <div>
-                {loginError && <p className='text-red-500'>{loginError}</p>}
-            </div>
             <form onSubmit={handleLogin} className='flex flex-col items-start gap-y-2 w-fit mx-auto my-4 border border-gray-300 bg-gray-200 shadow-xl p-4 rounded'>
+                <div className='w-full'>
+                    {loginError && <p className='text-white bg-red-500 text-center'>{loginError}</p>}
+                </div>
                 <div className='flex gap-x-2 justify-between w-full'>
                     <label htmlFor="email">Email</label>
                     <input type="text" name='email' id='email' placeholder='Email' className='border border-gray-500 rounded mx-2' />
@@ -55,7 +55,6 @@ const LoginForm = () => {
                     {loading ? "Loading..." : "Login"}
                 </button>
             </form>
-            <SocialLogin />
         </>
     )
 }

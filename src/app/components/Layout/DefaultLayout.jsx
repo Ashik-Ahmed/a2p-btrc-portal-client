@@ -2,10 +2,12 @@
 import React, { useState } from 'react'
 import Sidebar from '../Sidebar';
 import Header from '../Header';
+import { useSession } from 'next-auth/react';
 
 const DefaultLayout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
+    const session = useSession();
+    console.log("session is: ", session);
     return (
         <>
             {/* <!-- ===== Page Wrapper Start ===== --> */}
@@ -17,7 +19,7 @@ const DefaultLayout = ({ children }) => {
                 {/* <!-- ===== Content Area Start ===== --> */}
                 <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                     {/* <!-- ===== Header Start ===== --> */}
-                    <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+                    <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} session={session?.data} />
                     {/* <!-- ===== Header End ===== --> */}
 
                     {/* <!-- ===== Main Content Start ===== --> */}

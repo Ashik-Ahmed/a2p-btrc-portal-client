@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div>Dashboard</div>
+            <div>This is a Client Page</div>
             <p>{session?.user?.email}</p>
         </>
     )

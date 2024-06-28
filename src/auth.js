@@ -1,7 +1,5 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getUserByEmail } from "./data/users";
 
 
 export const {
@@ -47,7 +45,7 @@ export const {
                         })
                     })
                     const data = await res.json();
-
+                    // console.log("login api response: ", data);
                     if (data?.status == "Success") {
                         // return data.data.employee;
                         console.log("db employee: ", data?.data?.employee);
@@ -59,23 +57,11 @@ export const {
                     }
 
                 } catch (error) {
-                    // console.log(error);
+                    console.log("login api error is: ", error);
                     return error;
                 }
             }
-        }),
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-
-            authorization: {
-                params: {
-                    prompt: "consent",
-                    access_type: "offline",
-                    response_type: "code"
-                }
-            }
-        }),
+        })
     ],
     secret: process.env.AUTH_SECRET,
     // pages: {
@@ -102,7 +88,7 @@ export const {
                 session.user.department = token.department
                 session.user.accessToken = token.accessToken
             }
-            console.log("session is: ", session);
+            // console.log("session is: ", session);
             return session;
         }
     },

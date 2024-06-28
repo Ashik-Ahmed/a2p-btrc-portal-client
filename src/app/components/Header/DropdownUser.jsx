@@ -1,18 +1,19 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
 import user from "../../../../public/images/user.png"
 
-const DropdownUser = () => {
+const DropdownUser = ({ session }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
-      <Link
+      <div
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="flex items-center gap-4"
-        href="#"
+        className="flex items-center gap-4 cursor-pointer"
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium">
@@ -23,15 +24,11 @@ const DropdownUser = () => {
 
         <span className="h-12 w-12 rounded-full">
           <Image
-            width={92}
-            height={92}
-            src={user}
-            style={{
-              width: "auto",
-              height: "auto",
-            }}
+            width={80}
+            height={80}
+            src={session?.user?.image || user}
             alt="User"
-            className="rounded-full border"
+            className="rounded-full h-12 w-12"
           />
         </span>
 
@@ -50,12 +47,12 @@ const DropdownUser = () => {
             fill=""
           />
         </svg>
-      </Link>
+      </div>
 
       {/* <!-- Dropdown Start --> */}
       {dropdownOpen && (
         <div
-          className={`absolute right-0 mt-4 py-2 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark`}
+          className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark`}
         >
           <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
             <li>

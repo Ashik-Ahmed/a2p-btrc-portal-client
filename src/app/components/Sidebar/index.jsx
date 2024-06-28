@@ -85,8 +85,8 @@ const menuGroups = [
                         />
                     </svg>
                 ),
-                label: "Dashboard",
-                route: "/dashboard",
+                label: "Client Page",
+                route: "/client-page",
             },
         ],
     },
@@ -221,7 +221,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return (
         <ClickOutside onClick={() => setSidebarOpen(false)}>
             <aside
-                className={`absolute left-0 top-0 z-50 flex h-screen w-64 flex-col overflow-y-hidden bg-gray-900 text-white duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`absolute left-0 top-0 z-9999 flex h-screen w-62.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
                 {/* <!-- SIDEBAR HEADER --> */}
@@ -243,7 +243,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         className="block lg:hidden p-4"
                     >
                         <svg
-                            className="fill-current"
+                            className="fill-white"
                             width="20"
                             height="18"
                             viewBox="0 0 20 18"
@@ -276,7 +276,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <nav className="mt-5 px-2 py-4 lg:mt-9 lg:px-2">
                         {menuGroups.map((group, groupIndex) => (
                             <div key={groupIndex}>
-                                <h3 className="mb-4 ml-4 text-sm font-semibold text-gray-400">
+                                <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
                                     {group.name}
                                 </h3>
 
@@ -293,7 +293,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             </div>
                         ))}
                     </nav>
-                    {/* <!-- Sidebar Menu --> */}
                 </div>
             </aside>
         </ClickOutside>

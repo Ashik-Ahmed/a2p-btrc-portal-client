@@ -6,11 +6,12 @@ import { signIn, signOut } from "../../auth";
 export async function doSocialLogin(formData) {
     const action = formData.get('action')
     console.log(action);
-    await signIn(action, { redirectTo: "/home" })
+    await signIn(action, { redirectTo: "/" })
 }
 
 export async function doLogout() {
-    await signOut({ redirectTo: "/" })
+    console.log("doLogout");
+    await signOut({ redirectTo: "/auth/signin" })
 }
 
 export async function doCredentialLogin(formData) {
@@ -18,7 +19,7 @@ export async function doCredentialLogin(formData) {
         const email = formData.get('email')
         const password = formData.get('password')
         const response = await signIn("credentials", { email, password, redirect: false })
-
+        console.log("response is: ", response);
         return response;
 
     } catch (error) {

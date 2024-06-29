@@ -1,9 +1,11 @@
+import DataChart from './components/DataChart/DataChart'
+import TopClients from './components/TopClients/TopClients'
 
 export default function Home() {
   return (
     <>
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4 xl:grid-cols-4 2xl:gap-6 mt-2">
-        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
               <span className="block text-500 font-medium mb-3">Yesterday's Dipping</span>
@@ -16,7 +18,7 @@ export default function Home() {
           <span className="text-green-500 font-medium">+13% </span>
           <span className="text-500">since previous day</span>
         </div>
-        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
               <span className="block text-500 font-medium mb-3">Yesterday's SMS</span>
@@ -29,7 +31,7 @@ export default function Home() {
           <span className="text-green-500 font-medium">+17% </span>
           <span className="text-500">since previous day</span>
         </div>
-        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
               <span className="block text-500 font-medium mb-3">Today's Dipping</span>
@@ -39,10 +41,10 @@ export default function Home() {
               <i className="pi pi-inbox text-cyan-500 text-xl" />
             </div>
           </div>
-          <span className="text-red-500 font-medium">-8% </span>
+          <span className="text-red font-medium">-8% </span>
           <span className="text-500">than yesterday</span>
         </div>
-        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-110 duration-150">
+        <div className=" rounded border border-stroke bg-white px-7.5 py-6 dark:border-strokedark dark:bg-boxdark hover:bg-violet-300 hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
               <span className="block text-500 font-medium mb-3">Today's SMS</span>
@@ -52,9 +54,17 @@ export default function Home() {
               <i className="pi pi-comment text-purple-500 text-xl" />
             </div>
           </div>
-          <span className="text-red-500 font-medium">-11% </span>
+          <span className="text-red font-medium">-11% </span>
           <span className="text-500">than yesterday</span>
         </div>
+      </div>
+
+      <div className='border border-stroke shadow-md bg-white my-4 p-2 rounded'>
+        <DataChart />
+      </div>
+
+      <div>
+        <TopClients />
       </div>
     </>
   );

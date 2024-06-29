@@ -23,6 +23,8 @@ const config: Config = {
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",
+        violet: "#3336FF",
+        violetLight: "#8A8CFF",
         black: "#1C2434",
         red: "#FB5454",
         "black-2": "#010101",

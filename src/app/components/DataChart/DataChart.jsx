@@ -17,14 +17,14 @@ const DataChart = () => {
             datasets: [
                 {
                     label: 'Dipping Count',
-                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
+                    backgroundColor: '#6366F1',
+                    borderColor: '#6366F1',
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
                     label: 'SMS Count',
-                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
-                    borderColor: documentStyle.getPropertyValue('--pink-500'),
+                    backgroundColor: '#BCBDF9',
+                    borderColor: '#BCBDF9',
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]

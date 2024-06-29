@@ -1,0 +1,38 @@
+.tab-container {
+    position: relative;
+    display: inline-flex;
+    background-color: rgb(231, 231, 231);
+    padding: 0.15rem;
+    border-radius: 0.15rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tab-button {
+    position: relative;
+    z-index: 1;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.15rem;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-button:hover {
+    color: var(--primary);
+}
+
+.tab-active-indicator {
+    position: absolute;
+    bottom: 0.38rem;
+    /* Adjust to control the vertical positioning */
+    left: 0;
+    width: 32%;
+    height: 70%;
+    /* Set the height smaller than the container */
+    background-color: white;
+    border-radius: 0.15rem;
+    /* Smaller border radius to fit within the container */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+}

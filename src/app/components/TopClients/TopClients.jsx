@@ -33,7 +33,7 @@ const TopClients = () => {
     ]
 
     return (
-        <div className='lg:flex gap-4'>
+        <div className='lg:flex gap-4 '>
             <div className='w-full lg:w-1/2 border border-stroke shadow-md rounded-md p-2 bg-white'>
                 <div className='flex justify-between items-center my-2'>
                     <div>
@@ -49,7 +49,7 @@ const TopClients = () => {
                     <Column field="smsCount" header="SMS Count"></Column>
                 </DataTable>
             </div>
-            <div className='w-full lg:w-1/2 border border-stroke shadow-md rounded-md p-2 bg-white mt-4 md:mt-0'>
+            <div className='w-full lg:w-1/2 border border-stroke shadow-md rounded-md p-2 bg-white mt-4 lg:mt-0'>
                 <div className='flex justify-between items-center my-2'>
                     <div>
                         <p className='uppercase text-graydark text-light'>Top ANS</p>

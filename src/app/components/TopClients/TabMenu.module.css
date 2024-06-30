@@ -19,7 +19,7 @@
 }
 
 .tab-button:hover {
-    color: var(--primary);
+    color: #6366F1;
 }
 
 .tab-active-indicator {

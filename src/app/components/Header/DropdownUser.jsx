@@ -5,9 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
 import user from "../../../../public/images/user.png"
+import { doLogout } from "@/app/serverActions/authActions";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const DropdownUser = ({ session }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const router = useRouter();
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -17,9 +22,9 @@ const DropdownUser = ({ session }) => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium">
-            Thomas Anree
+            {session?.user?.name}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">{session?.user?.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
@@ -52,9 +57,9 @@ const DropdownUser = ({ session }) => {
       {/* <!-- Dropdown Start --> */}
       {dropdownOpen && (
         <div
-          className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark`}
+          className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default`}
         >
-          <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
+          <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 ">
             <li>
               <Link
                 href="/profile"
@@ -72,13 +77,14 @@ const DropdownUser = ({ session }) => {
               </Link>
             </li>
           </ul>
-          <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+          <button onClick={async () => await signOut()} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
             Log Out
           </button>
         </div>
-      )}
+      )
+      }
       {/* <!-- Dropdown End --> */}
-    </ClickOutside>
+    </ClickOutside >
   );
 };
 

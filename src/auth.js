@@ -34,7 +34,7 @@ export const {
 
                 const { email, password } = credentials;
                 try {
-                    const res = await fetch('http://localhost:5000/api/v1/employee/login', {
+                    const res = await fetch('http://localhost:5000/api/v1/user/login', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -45,20 +45,19 @@ export const {
                         })
                     })
                     const data = await res.json();
-                    // console.log("login api response: ", data);
+                    console.log("login api response: ", data);
                     if (data?.status == "Success") {
                         // return data.data.employee;
-                        console.log("db employee: ", data?.data?.employee);
-                        const employee = data?.data?.employee;
+                        console.log("db employee: ", data?.data);
+                        const employee = data?.data;
                         return employee;
                     }
                     else {
-                        return null;
+                        throw new Error(data?.message || 'Login failed'); //send the error
                     }
-
                 } catch (error) {
                     console.log("login api error is: ", error);
-                    return error;
+                    throw new Error(error.message || 'Internal Server Error');
                 }
             }
         })
@@ -72,9 +71,8 @@ export const {
             // console.log("inside jwt user: ", user);
             // console.log("inside jwt token: ", token);
             if (user) {
-                token.role = user.userRole;
-                token._id = user._id;
-                token.department = user.department
+                token.role = user.role;
+                token._id = user.user_id;
                 token.accessToken = user.accessToken
             }
             return token;
@@ -85,7 +83,6 @@ export const {
             if (session?.user) {
                 session.user.role = token.role;
                 session.user._id = token._id;
-                session.user.department = token.department
                 session.user.accessToken = token.accessToken
             }
             // console.log("session is: ", session);

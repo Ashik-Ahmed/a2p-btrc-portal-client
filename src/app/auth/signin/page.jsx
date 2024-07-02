@@ -1,10 +1,16 @@
 import React from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
-const Signin = () => {
+const Signin = async () => {
+    const session = await auth();
     return (
         <>
-            <LoginForm />
+            {
+                // session?.user ? redirect('/') : <LoginForm />
+                <LoginForm />
+            }
         </>
     )
 }

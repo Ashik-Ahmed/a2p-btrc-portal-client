@@ -221,11 +221,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return (
         <ClickOutside onClick={() => setSidebarOpen(false)}>
             <aside
-                className={`absolute left-0 top-0 z-9999 flex h-screen w-62.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear  lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
                 {/* <!-- SIDEBAR HEADER --> */}
-                <div className="flex items-center justify-between gap-2 px-2 py-5.5 lg:py-6.5">
+                <div className="flex items-center justify-between gap-2 px-2 w-full bg-white">
                     <Link href="/">
                         <Image
                             width={176}
@@ -233,7 +233,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             src={fullLogo}
                             alt="Logo"
                             priority
-                            className="p-2"
+                            className="p-1 bg-white"
                         />
                     </Link>
 
@@ -243,7 +243,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         className="block lg:hidden p-4"
                     >
                         <svg
-                            className="fill-white"
+                            className="fill-black"
                             width="20"
                             height="18"
                             viewBox="0 0 20 18"

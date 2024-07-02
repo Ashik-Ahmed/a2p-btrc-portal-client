@@ -11,7 +11,7 @@ const DefaultLayout = ({ children }) => {
     return (
         <>
             {/* <!-- ===== Page Wrapper Start ===== --> */}
-            <div className="flex h-screen overflow-hidden bg-gray">
+            <div className="flex h-screen overflow-hidden">
                 {/* <!-- ===== Sidebar Start ===== --> */}
                 <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
                 {/* <!-- ===== Sidebar End ===== --> */}

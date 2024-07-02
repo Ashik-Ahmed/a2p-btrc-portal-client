@@ -25,7 +25,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <NextAuthSessionProvider>
         <PrimeReactProvider>
-          <body className={`${inter.className} bg-gray`}>
+          <body className={`${inter.className} bg-gray-100`}>
             {isAuthPage ? (
               children
             ) : (

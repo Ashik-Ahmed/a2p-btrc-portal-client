@@ -1,19 +1,18 @@
 import React from 'react'
+import ManageUsers from '../components/ManageUsers/ManageUsers';
 
 const ManageUsersPage = async () => {
 
-    const userData = await fetch('http://localhost:5000/api/v1/user', {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
+    const getAllUser = async () => {
+        const res = await fetch('http://localhost:5000/api/v1/user')
+        const data = await res.json()
+        return data
+    }
 
-    const users = await userData.json();
-    console.log(users);
+    const users = await getAllUser()
 
     return (
-        <div>ManageUsersPage</div>
+        <ManageUsers users={users?.data} />
     )
 }
 

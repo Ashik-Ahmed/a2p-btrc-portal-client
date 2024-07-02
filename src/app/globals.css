@@ -30,3 +30,8 @@
     background-color: #ebe7e7;
     /* Background color for even rows */
 }
+
+.p-datatable .p-datatable-tbody>tr:hover {
+    background-color: #d3d3d3;
+    transition: all 0.2s ease-in-out;
+}

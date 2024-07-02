@@ -10,7 +10,6 @@ const Layout = ({ children, session }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     const pathname = usePathname();
-    console.log("current path: ", pathname);
 
     if (pathname.includes('auth')) {
         return children

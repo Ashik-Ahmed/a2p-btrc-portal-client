@@ -7,7 +7,7 @@ import NextAuthSessionProvider from "../utils/sessionProvider";
 import { PrimeReactProvider } from 'primereact/api';
 import DefaultLayout from "./components/Layout/DefaultLayout";
 import { headers } from "next/headers";
-
+import { auth } from "@/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,18 +19,22 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const headersList = headers();
   const pathname = headersList.get('x-pathname') || '/'; // Default to '/' if header is not found
-  const isAuthPage = pathname.includes('/auth');
+  const isAuthPage = pathname.includes('auth');
+
+  console.log(`showing sidebar: ${isAuthPage ? 'no sidebar' : 'yes sidebar available'}`);
+  const session = await auth();
 
   return (
     <html lang="en">
       <NextAuthSessionProvider>
         <PrimeReactProvider>
           <body className={`${inter.className} bg-gray-100`}>
-            {isAuthPage ? (
+            {/* {!session ? (
               children
             ) : (
               <DefaultLayout>{children}</DefaultLayout>
-            )}
+            )} */}
+            <DefaultLayout>{children}</DefaultLayout>
           </body>
         </PrimeReactProvider>
       </NextAuthSessionProvider>

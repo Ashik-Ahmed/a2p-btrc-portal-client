@@ -8,7 +8,7 @@ export async function middleware(request) {
 
     const isAuthenticated = !!session?.user?.email;
     const isPublicRoute = (PUBLIC_ROUTES.find((route) => request.nextUrl.pathname.startsWith(route)) && !PROTECTED_SUB_ROUTES.find(route => request.nextUrl.pathname.includes(route)))
-    console.log("isAuthenticated: ", isAuthenticated, "isPublicRoute: ", isPublicRoute);
+    // console.log("isAuthenticated: ", isAuthenticated, "isPublicRoute: ", isPublicRoute);
     if (!isPublicRoute && !isAuthenticated) {
         console.log("redirecting to signin");
         return NextResponse.redirect(new URL('/auth/signin', request.nextUrl))
@@ -17,6 +17,7 @@ export async function middleware(request) {
     // Set custom header with pathname
     const response = NextResponse.next();
     response.headers.set('x-pathname', request.nextUrl.pathname);
+    console.log("response is: ", response);
     return response;
 }
 

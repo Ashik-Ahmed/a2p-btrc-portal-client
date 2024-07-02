@@ -3,10 +3,18 @@
 import React, { useState } from 'react'
 import Sidebar from '../Sidebar'
 import Header from '../Header'
+import { usePathname } from 'next/navigation';
 
 const Layout = ({ children, session }) => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
+    const pathname = usePathname();
+    console.log("current path: ", pathname);
+
+    if (pathname.includes('auth')) {
+        return children
+    }
 
     return (
         <>

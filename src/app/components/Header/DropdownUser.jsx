@@ -22,16 +22,16 @@ const DropdownUser = ({ session }) => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium">
-            {session?.user?.name}
+            {session?.name}
           </span>
-          <span className="block text-xs">{session?.user?.email}</span>
+          <span className="block text-xs">{session?.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
           <Image
             width={80}
             height={80}
-            src={session?.user?.image || user}
+            src={session?.image || user}
             alt="User"
             className="rounded-full h-12 w-12"
           />

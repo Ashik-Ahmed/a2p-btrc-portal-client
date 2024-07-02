@@ -89,7 +89,7 @@ const LoginForm = () => {
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-primary">Forgot password?</a>
+                                <a href="/auth/forget-password" className="font-medium text-primary">Forgot password?</a>
                             </div>
                         </div>
 

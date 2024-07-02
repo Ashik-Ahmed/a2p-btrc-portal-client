@@ -19,7 +19,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const headersList = headers();
   const pathname = headersList.get('x-pathname') || '/'; // Default to '/' if header is not found
-  const isAuthPage = pathname.includes('/signin');
+  const isAuthPage = pathname.includes('/auth');
 
   return (
     <html lang="en">

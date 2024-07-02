@@ -8,7 +8,7 @@ export default function Home() {
         <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
-              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">{`Yesterday's Dipping`}</span>
+              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">Dipping Yesterday</span>
               <div className="text-900 font-medium text-xl">15187312</div>
             </div>
             <div className="flex items-center justify-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -21,7 +21,7 @@ export default function Home() {
         <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
-              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">{`Yesterday's SMS`}</span>
+              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">SMS Yesterday</span>
               <div className="text-900 font-medium text-xl">21187312</div>
             </div>
             <div className="flex items-center justify-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -34,7 +34,7 @@ export default function Home() {
         <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
-              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">{`Today's Dipping`}</span>
+              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">Dipping Today</span>
               <div className="text-900 font-medium text-xl">28441</div>
             </div>
             <div className="flex items-center justify-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -47,7 +47,7 @@ export default function Home() {
         <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
           <div className="flex justify-between mb-3">
             <div>
-              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">{`Today's SMS`}</span>
+              <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">SMS Today</span>
               <div className="text-900 font-medium text-xl">152</div>
             </div>
             <div className="flex items-center justify-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>

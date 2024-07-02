@@ -20,14 +20,13 @@ const config = {
     extend: {
       colors: {
         current: "currentColor",
-        white: "#FFFFFF",
         black: "#1C2434",
         red: "#FB5454",
         body: "#64748B",
         bodydark: "#AEB7C0",
         bodydark1: "#DEE4EE",
         bodydark2: "#8A99AF",
-        primary: "#6366F1",
+        primary: "#3B4FE1",
         secondary: "#80CAEE",
         stroke: "#E2E8F0",
         graydark: "#333A48",

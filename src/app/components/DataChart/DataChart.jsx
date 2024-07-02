@@ -17,8 +17,8 @@ const DataChart = () => {
             datasets: [
                 {
                     label: 'Dipping Count',
-                    backgroundColor: '#6366F1',
-                    borderColor: '#6366F1',
+                    backgroundColor: '#3B4FE1',
+                    borderColor: '#3B4FE1',
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {

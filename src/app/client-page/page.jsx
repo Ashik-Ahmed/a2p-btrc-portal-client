@@ -5,7 +5,9 @@ import React from 'react'
 
 const Dashboard = () => {
 
-    const { data: session, status } = useSession()
+    const { data: session, status } = useSession();
+
+    console.log("session from client paege: ", session, status);
 
     if (status === 'loading') {
         return <p>Loading...</p>

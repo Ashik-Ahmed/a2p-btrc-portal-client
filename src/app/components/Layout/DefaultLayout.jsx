@@ -1,13 +1,12 @@
-import { auth } from '@/auth'
 import React from 'react'
 import Layout from './Layout'
-import { headers } from 'next/headers'
+import { auth } from '@/auth';
 
 const DefaultLayout = async ({ children }) => {
-    const session = await auth()
-
+    const session = await auth();
+    console.log("session from default layout: ", session);
     return (
-        <Layout session={session?.user}>{children}</Layout>
+        <Layout session={session}> {children}</Layout >
     )
 }
 

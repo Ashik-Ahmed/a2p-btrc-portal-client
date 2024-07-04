@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { redirect, useRouter } from 'next/navigation'
 import { doCredentialLogin } from '../../serverActions/authActions'
 import Image from 'next/image'
@@ -33,11 +33,15 @@ const LoginForm = () => {
             }
             else {
                 console.log("redirecting...");
-                router.push('/')
+                // router.push('/')
+                router.refresh()
                 // redirect('/')
+                // setTimeout(() => {
+                //     window.location.reload();
+                // }, 800); // Small delay to ensure the navigation is complete
             }
         } catch (error) {
-            console.log(error);
+            console.log("Login error: ", error);
             setLoginError("Wrong Credentials")
             // throw new Error(error.message)
         }

@@ -6,7 +6,7 @@ import Header from '../Header'
 import { usePathname } from 'next/navigation';
 
 const Layout = ({ children, session }) => {
-
+    console.log("session from main layout: ", session);
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     const pathname = usePathname();

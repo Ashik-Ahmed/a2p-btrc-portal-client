@@ -6,6 +6,7 @@ import "primereact/resources/primereact.min.css";
 import NextAuthSessionProvider from "../utils/sessionProvider";
 import { PrimeReactProvider } from 'primereact/api';
 import DefaultLayout from "./components/Layout/DefaultLayout";
+import { auth } from "../auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,9 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const session = await auth();
+
+  console.log("session from root layout: ", session);
 
   return (
     <html lang="en">
@@ -26,7 +30,7 @@ export default async function RootLayout({ children }) {
             ) : (
               <DefaultLayout>{children}</DefaultLayout>
             )} */}
-            <DefaultLayout>{children}</DefaultLayout>
+            <DefaultLayout session={session}>{children}</DefaultLayout>
           </body>
         </PrimeReactProvider>
       </NextAuthSessionProvider>

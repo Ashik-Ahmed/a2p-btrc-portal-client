@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import styles from './TabMenu.module.css';
 
 const TabMenu = ({ onTabChange }) => {
-    const [activeTab, setActiveTab] = useState('Day');
+    const [activeTab, setActiveTab] = useState('1');
 
-    const tabs = ['Day', 'Week', 'Month'];
+    const tabs = [
+        { label: 'Day', value: '1' },
+        { label: 'Week', value: '7' },
+        { label: 'Month', value: '30' },
+    ];
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-        if (onTabChange) onTabChange(tab);
+    const handleTabClick = (value) => {
+        setActiveTab(value);
+        if (onTabChange) onTabChange(value);
     };
 
     const getTabIndex = () => {
-        return tabs.findIndex(tab => tab === activeTab);
+        return tabs.findIndex(tab => tab.value === activeTab);
     };
 
     return (
@@ -23,11 +27,11 @@ const TabMenu = ({ onTabChange }) => {
             />
             {tabs.map((tab) => (
                 <button
-                    key={tab}
-                    className={`${styles['tab-button']} ${activeTab === tab ? 'text-primary' : 'text-gray-600'}`}
-                    onClick={() => handleTabClick(tab)}
+                    key={tab.value}
+                    className={`${styles['tab-button']} ${activeTab === tab.value ? 'text-primary' : 'text-gray-600'}`}
+                    onClick={() => handleTabClick(tab.value)}
                 >
-                    {tab}
+                    {tab.label}
                 </button>
             ))}
         </div>

@@ -1,36 +1,39 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import TabMenu from './TabMenu'
+import { getTopAggregators, getTopAns } from '@/app/serverActions/dashboardActions';
 const TopClients = () => {
-    const [selectedTab, setSelectedTab] = useState('Day');
 
-    const handleTabChange = (tab) => {
-        setSelectedTab(tab);
-        // Fetch or set the data for the selected tab
+    const [topAggregators, setTopAggregators] = useState([]);
+    const [topAns, setTopAns] = useState([]);
+    const [topAggregatorInterval, setTopAggregatorInterval] = useState(1);
+    const [topAnsInterval, setTopAnsInterval] = useState(1);
+    console.log("top aggregators: ", topAggregators);
+    console.log("top ans: ", topAns);
+    const handleTopAggregatorInterval = (tab) => {
+        setTopAggregatorInterval(tab);
+    };
+    const handleTopAnsInterval = (tab) => {
+        setTopAnsInterval(tab);
     };
 
-    const topAggregators = [
-        { clientId: "Digi Byte", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Flow SMS", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Nexmo", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Twilio", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Zenvia", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Sinch", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Plivo", dippingCount: 23202344, smsCount: 234234234 },
-    ]
+    const topAggregatorsData = async () => {
+        const topAggregators = await getTopAggregators(topAggregatorInterval);
+        setTopAggregators(topAggregators);
+    }
 
-    const topANSs = [
-        { clientId: "Grameenphone", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Robi", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Banglalink", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Teletalk", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Ufone", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Etisalat", dippingCount: 23202344, smsCount: 234234234 },
-        { clientId: "Warid", dippingCount: 23202344, smsCount: 234234234 },
-    ]
+    const topAnsData = async () => {
+        const topAns = await getTopAns(topAnsInterval);
+        setTopAns(topAns);
+    }
+
+    useEffect(() => {
+        topAggregatorsData();
+        topAnsData();
+    }, [topAggregatorInterval, topAnsInterval]);
 
     return (
         <div className='lg:flex gap-4 '>
@@ -40,13 +43,13 @@ const TopClients = () => {
                         <p className='uppercase text-graydark text-light'>Top Aggregator</p>
                     </div>
                     <div>
-                        <TabMenu onTabChange={handleTabChange} />
+                        <TabMenu onTabChange={handleTopAggregatorInterval} />
                     </div>
                 </div>
-                <DataTable value={topAggregators} size="small" className="custom-header">
-                    <Column field="clientId" header="Aggregator"></Column>
-                    <Column field="dippingCount" header="Dipping Count"></Column>
-                    <Column field="smsCount" header="SMS Count"></Column>
+                <DataTable value={topAggregators} size="small" className="custom-header" emptyMessage="No data found">
+                    <Column field="clientid" header="Aggregator"></Column>
+                    <Column field="total_dippingcount" header="Dipping Count"></Column>
+                    <Column field="total_smscount" header="SMS Count"></Column>
                 </DataTable>
             </div>
             <div className='w-full lg:w-1/2 border border-stroke shadow-md rounded-md p-2 bg-white mt-4 lg:mt-0'>
@@ -55,13 +58,13 @@ const TopClients = () => {
                         <p className='uppercase text-graydark text-light'>Top ANS</p>
                     </div>
                     <div>
-                        <TabMenu onTabChange={handleTabChange} />
+                        <TabMenu onTabChange={handleTopAnsInterval} />
                     </div>
                 </div>
-                <DataTable value={topANSs} size="small" className="custom-header">
-                    <Column field="clientId" header="ANS"></Column>
-                    <Column field="dippingCount" header="Dipping Count"></Column>
-                    <Column field="smsCount" header="SMS Count"></Column>
+                <DataTable value={topAns} size="small" className="custom-header" emptyMessage="No data found">
+                    <Column field="ansname" header="ANS"></Column>
+                    <Column field="total_dippingcount" header="Dipping Count"></Column>
+                    <Column field="total_smscount" header="SMS Count"></Column>
                 </DataTable>
             </div>
         </div>

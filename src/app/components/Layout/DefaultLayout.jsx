@@ -4,7 +4,7 @@ import { auth } from '@/auth';
 
 const DefaultLayout = async ({ children }) => {
     const session = await auth();
-    console.log("session from default layout: ", session);
+    // console.log("session from default layout: ", session);
     return (
         <Layout session={session}> {children}</Layout >
     )

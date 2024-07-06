@@ -3,29 +3,29 @@
 import React, { useEffect, useState } from 'react'
 import { Chart } from 'primereact/chart';
 
-const DataChart = () => {
+const DataChart = ({ weeklyData }) => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
-
+    // console.log("weekly data: ", weeklyData);
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
         const data = {
-            labels: ['29-06-2024', '28-06-2024', '27-06-2024', '26-06-2024', '25-06-2024', '24-06-2024', '23-06-2024'],
+            labels: weeklyData?.map((item) => item?.date?.split('T')[0]),
             datasets: [
                 {
                     label: 'Dipping Count',
                     backgroundColor: '#3B4FE1',
                     borderColor: '#3B4FE1',
-                    data: [65, 59, 80, 81, 56, 55, 40]
+                    data: weeklyData?.map((item) => item?.total_dipping)
                 },
                 {
                     label: 'SMS Count',
                     backgroundColor: '#BCBDF9',
                     borderColor: '#BCBDF9',
-                    data: [28, 48, 40, 19, 86, 27, 90]
+                    data: weeklyData?.map((item) => item?.total_sms)
                 }
             ]
         };

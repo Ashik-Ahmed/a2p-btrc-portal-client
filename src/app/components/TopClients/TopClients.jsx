@@ -39,8 +39,9 @@ const TopClients = () => {
         <div className='lg:flex gap-4 '>
             <div className='w-full lg:w-1/2 border border-stroke shadow-md rounded-md p-2 bg-white'>
                 <div className='flex justify-between items-center my-2'>
-                    <div>
+                    <div className='flex items-baseline gap-x-1'>
                         <p className='uppercase text-graydark text-light'>Top Aggregator</p>
+                        <span className='text-xs italic'>(sms count)</span>
                     </div>
                     <div>
                         <TabMenu onTabChange={handleTopAggregatorInterval} />
@@ -54,8 +55,9 @@ const TopClients = () => {
             </div>
             <div className='w-full lg:w-1/2 border border-stroke shadow-md rounded-md p-2 bg-white mt-4 lg:mt-0'>
                 <div className='flex justify-between items-center my-2'>
-                    <div>
+                    <div className='flex items-baseline gap-x-1'>
                         <p className='uppercase text-graydark text-light'>Top ANS</p>
+                        <span className='text-xs italic'>(sms count)</span>
                     </div>
                     <div>
                         <TabMenu onTabChange={handleTopAnsInterval} />

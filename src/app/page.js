@@ -1,11 +1,16 @@
-import TopClientsData from './@topclients/page';
+import { Suspense } from 'react';
 import WeeklyData from './@weeklydata/page';
+import TopClientsData from './@topclients/page';
 
 export default function Home() {
   return (
     <>
-      <WeeklyData />
-      <TopClientsData />
+      <Suspense>
+        <WeeklyData />
+      </Suspense>
+      <Suspense>
+        <TopClientsData />
+      </Suspense>
     </>
   );
 }

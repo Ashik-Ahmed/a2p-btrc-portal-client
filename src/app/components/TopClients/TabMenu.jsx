@@ -5,9 +5,9 @@ const TabMenu = ({ onTabChange }) => {
     const [activeTab, setActiveTab] = useState('1');
 
     const tabs = [
-        { label: 'Day', value: '1' },
-        { label: 'Week', value: '7' },
-        { label: 'Month', value: '30' },
+        { label: 'Daily', value: '1' },
+        { label: 'Weekly', value: '7' },
+        { label: 'Monthly', value: '30' },
     ];
 
     const handleTabClick = (value) => {
@@ -20,10 +20,10 @@ const TabMenu = ({ onTabChange }) => {
     };
 
     return (
-        <div className={`${styles['tab-container']} flex justify-center gap-x-2`}>
+        <div className={`${styles['tab-container']} flex justify-center gap-x-1`}>
             <div
                 className={styles['tab-active-indicator']}
-                style={{ left: `${getTabIndex() * 33.333}%` }}
+                style={{ left: `${getTabIndex() * 32.333}%` }}
             />
             {tabs.map((tab) => (
                 <button

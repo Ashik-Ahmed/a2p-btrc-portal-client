@@ -13,7 +13,7 @@ const DataChart = ({ weeklyData }) => {
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
         const data = {
-            labels: weeklyData?.map((item) => item?.date?.split('T')[0]),
+            labels: weeklyData?.map((item) => item?.date),
             datasets: [
                 {
                     label: 'Dipping Count',

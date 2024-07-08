@@ -1,15 +1,37 @@
 "use client";
 
 import formatNumberBD from '@/utils/numberFormat';
-import { Button } from 'primereact/button';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
+import { InputText } from 'primereact/inputtext';
 import React, { useState } from 'react';
+import { FilterMatchMode } from 'primereact/api';
 
 const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
     const [reportData, setReportData] = useState(a2pSummaryReport);
     const [loading, setLoading] = useState(false);
+
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const [filters, setFilters] = useState({
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        client_id: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        operator: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        cli: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        billMsisdn: { value: null, matchMode: FilterMatchMode.CONTAINS }
+    });
+
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters = { ...filters };
+
+        _filters['global'].value = value;
+
+        setFilters(_filters);
+        setGlobalFilterValue(value);
+    };
 
     const smsCountBodyTemplate = (rowData) => {
         return (
@@ -21,12 +43,39 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
 
     return (
-        <div>
-            <h1>A2P Summary Report</h1>
+        <div className='px-4 py-2 bg-white rounded shadow-md'>
+            <div className='flex justify-between items-center mb-2'>
+                <h1 className='text-xl font-bold text-graydark'>A2P Summary Report</h1>
+                <div className="relative">
+                    <input
+                        onChange={onGlobalFilterChange}
+                        type="text"
+                        placeholder="Search..."
+                        className="w-full rounded border border-stroke bg-transparent py-1.5 pl-8 pr-4 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    />
+
+                    <span className="absolute left-1 top-1.5">
+                        <svg
+                            className="fill-[#a1a1a1]"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 22 22"
+                            width={"22"}
+                            height={"22"}
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M11 4a7 7 0 00-7 7 7 7 0 0011.31 5.31l4.58 4.59 1.42-1.42-4.58-4.59A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
+                            />
+                        </svg>
+                    </span>
+                </div>
+            </div>
 
             <DataTable value={reportData} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
-                paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                filters={filters} filterDisplay="menu" globalFilterFields={['client_id', 'operator', 'cli', 'billMsisdn']}
                 emptyMessage="No data found" loading={loading} className="custom-header report-table">
                 <Column field="client_id" header="Aggregator" />
                 <Column field="delivery_date" header="Delivered" />

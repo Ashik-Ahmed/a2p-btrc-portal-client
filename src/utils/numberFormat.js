@@ -19,10 +19,3 @@ export default function formatNumberBD(num) {
 
     return result;
 }
-
-// Example usage
-console.log(formatNumberBD(1234567)); // "12,34,567"
-console.log(formatNumberBD(123456));  // "1,23,456"
-console.log(formatNumberBD(12345));   // "12,345"
-console.log(formatNumberBD(1234));    // "1,234"
-console.log(formatNumberBD(123));     // "123"

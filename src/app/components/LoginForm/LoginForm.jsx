@@ -24,17 +24,15 @@ const LoginForm = () => {
 
         try {
             const formData = new FormData(e.currentTarget)
-            console.log("form data: ", formData);
             const response = await doCredentialLogin(formData);
-            console.log("credential login response: ", response);
 
             if (!!response?.error) {
                 setLoginError(response?.error?.message || "Something went wrong")
             }
             else {
                 console.log("redirecting...");
-                // router.push('/')
-                router.refresh()
+                router.push('/')
+                // router.refresh()
                 // redirect('/')
                 // setTimeout(() => {
                 //     window.location.reload();
@@ -50,7 +48,6 @@ const LoginForm = () => {
 
     return (
         <>
-
             <div className="flex items-center justify-center min-h-screen bg-gray-50">
                 <div className="w-full max-w-lg p-8 m-4 space-y-8 bg-white shadow-2xl shadow-primary rounded-xl">
                     <div className="flex flex-col items-center">

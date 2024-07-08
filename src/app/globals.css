@@ -35,3 +35,23 @@
     background-color: #d3d3d3;
     transition: all 0.2s ease-in-out;
 }
+
+.report-table .p-datatable-tbody>tr {
+    font-size: 0.9rem;
+}
+
+.report-table .p-datatable-tbody>tr>th {
+    font-size: 0.8rem;
+}
+
+/* PrimeReact DataTable Paginator Active Page */
+.p-paginator .p-paginator-page.p-highlight {
+    background-color: #3B4FE1 !important;
+    border-color: #3B4FE1 !important;
+    color: #ffffff !important;
+    margin-left: 0.5rem;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+    margin-left: 0.5rem;
+}

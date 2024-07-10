@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import "primereact/resources/primereact.min.css";
+import "./globals.css";
 import NextAuthSessionProvider from "../utils/sessionProvider";
 import { PrimeReactProvider } from 'primereact/api';
 import DefaultLayout from "./components/Layout/DefaultLayout";

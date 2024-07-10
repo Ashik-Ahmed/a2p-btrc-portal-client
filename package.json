@@ -12,8 +12,9 @@
     "chart.js": "^4.4.3",
     "next": "14.2.4",
     "next-auth": "^5.0.0-beta.19",
+    "normalize.css": "^8.0.1",
     "primeicons": "^7.0.0",
-    "primereact": "^10.6.6",
+    "primereact": "^10.7.0",
     "react": "^18",
     "react-dom": "^18",
     "sharp": "^0.33.4"

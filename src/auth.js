@@ -73,6 +73,7 @@ export const {
             if (user) {
                 token.role = user.role;
                 token._id = user.user_id;
+                token.photo = user.photo;
                 token.accessToken = user.accessToken
             }
             return token;
@@ -83,6 +84,7 @@ export const {
             if (session?.user) {
                 session.user.role = token.role;
                 session.user._id = token._id;
+                session.user.photo = token.photo;
                 session.user.accessToken = token.accessToken
             }
             // console.log("session is: ", session);

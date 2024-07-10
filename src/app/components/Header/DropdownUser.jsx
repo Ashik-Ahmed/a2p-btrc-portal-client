@@ -10,7 +10,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const DropdownUser = ({ session }) => {
-  // console.log("session from dropdown user: ", session);
+  console.log("session from dropdown user: ", session);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const router = useRouter();
@@ -32,7 +32,7 @@ const DropdownUser = ({ session }) => {
           <Image
             width={80}
             height={80}
-            src={session?.user?.image || user}
+            src={session?.user?.photo || user}
             alt="User"
             className="rounded-full h-12 w-12"
           />

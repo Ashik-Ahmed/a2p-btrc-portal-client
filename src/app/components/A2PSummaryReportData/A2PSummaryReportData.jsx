@@ -19,6 +19,8 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
     const [loading, setLoading] = useState(false);
     const [selectedAggregator, setSelectedAggregator] = useState(null);
     const [selectedOperator, setSelectedOperator] = useState(null);
+    const [selectedAnsType, setSelectedAnsType] = useState(null);
+    const [selectedCli, setSelectedCli] = useState(null);
 
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [filters, setFilters] = useState({
@@ -45,6 +47,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         { label: "PeakPrima", client_id: "PeakPrima" }
     ]
 
+
     const operators = [
         { label: "All", operator: "" },
         { label: "GrameenPhone", operator: "GrameenPhone" },
@@ -57,11 +60,35 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         { label: "ADN", operator: "ADN" }
     ]
 
+    const cliData = [
+        { label: "All", cli: "" },
+        { label: "SONALI BANK", cli: "SONALI BANK" },
+        { label: "BD Customs", cli: "BD Customs" },
+        { label: "KLUBHAUS BD", cli: "KLUBHAUS BD" },
+        { label: "UCB", cli: "UCB" },
+        { label: "01969901070", cli: "01969901070" },
+        { label: "KRISHI BANK", cli: "KRISHI BANK" },
+        { label: "Apex", cli: "Apex" },
+        { label: "IDRAMETLIFE", cli: "IDRAMETLIFE" },
+        { label: "CITY BANK", cli: "CITY BANK" },
+        { label: "IDRA_SONALI", cli: "IDRA_SONALI" },
+        { label: "VoguePrince", cli: "VoguePrince" },
+        { label: "AKASH DTH", cli: "AKASH DTH" },
+        { label: "01969910557", cli: "01969910557" },
+        { label: "Pizza.Hut", cli: "Pizza.Hut" },
+        { label: "Unimart", cli: "Unimart" },
+        { label: "GuardianLYF", cli: "GuardianLYF" },
+        { label: "KFC BD", cli: "KFC BD" },
+        { label: "DBH", cli: "DBH" },
+        { label: "SCHOLASTICA", cli: "SCHOLASTICA" },
+        { label: "bKashNotice", cli: "bKashNotice" },
+    ]
+
     const getSummaryReport = async () => {
 
         setLoading(true);
 
-        const filter = { client_id: selectedAggregator?.client_id, operator: selectedOperator?.operator }
+        const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType, operator: selectedOperator?.operator, cli: selectedCli?.cli }
         console.log("filter: ", filter);
 
         const summaryReportData = await getA2PSummaryReport(filter)
@@ -91,20 +118,31 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
     return (
         <div>
-            <div className='flex gap-x-2 px-4 py-2 my-2 bg-white'>
-                <FloatLabel className="w-1/2">
-                    <Dropdown inputId="client_id" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" className="border w-1/2" />
-                    <label htmlFor="client_id">Select Aggregator</label>
-                </FloatLabel>
-                <FloatLabel className="w-1/2">
-                    <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" className="border w-1/2" />
-                    <label htmlFor="operator">Select Operator</label>
-                </FloatLabel>
-                <Button onClick={getSummaryReport} type="submit" className="bg-sky-500 text-white p-2">Submit</Button>
+            <div className=' px-4 py-2 my-2 bg-white rounded'>
+                <h2 className='uppercase text-xl font-thin text-graydark'>Filter Options</h2>
+                <div className='grid gap-2 md:flex md:gap-x-2 mt-8'>
+                    <FloatLabel className="w-full">
+                        <Dropdown inputId="client_id" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" className="border w-full" />
+                        <label htmlFor="client_id">Select Aggregator</label>
+                    </FloatLabel>
+                    <FloatLabel className="w-full">
+                        <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={["MNO", "IPTSP"]} className="border w-full" />
+                        <label htmlFor="ans_type">Select ANS Type</label>
+                    </FloatLabel>
+                    <FloatLabel className="w-full">
+                        <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" className="border w-full" />
+                        <label htmlFor="operator">Select ANS</label>
+                    </FloatLabel>
+                    <FloatLabel className="w-full">
+                        <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliData} optionLabel="label" className="border w-full" />
+                        <label htmlFor="cli">Select CLI</label>
+                    </FloatLabel>
+                    <button onClick={getSummaryReport} className="bg-sky-500 text-white w-full"> Search </button>
+                </div>
             </div>
             <div className='px-4 py-2 bg-white rounded shadow-md'>
                 <div className='flex justify-between items-center mb-2'>
-                    <h1 className='text-xl font-bold text-graydark'>A2P Summary Report</h1>
+                    <h1 className='uppercase text-xl font-thin text-graydark'>A2P Summary Report</h1>
                     <div className="relative">
                         <input
                             onChange={onGlobalFilterChange}
@@ -137,16 +175,16 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                     filters={filters} filterDisplay="menu" globalFilterFields={['client_id', 'operator', 'cli', 'billMsisdn']}
                     emptyMessage="No data found" loading={loading} className="custom-header report-table">
                     <Column field="client_id" header="Aggregator" />
-                    <Column field="delivery_date" header="Delivered" />
+                    <Column field="delivery_date" header="Date" />
                     <Column field="ans_type" header="ANS Type" />
                     <Column field="operator" header="ANS Name" />
                     <Column field="cli" header="CLI" />
                     <Column field="message_type" header="Content Type" />
-                    <Column field="rn_code" header="RN Code" />
+                    {/* <Column field="rn_code" header="RN Code" /> */}
                     <Column body={smsCountBodyTemplate} header="SMS Count" />
                     <Column field="dipping_count" header="Dipping Count" />
                     {/* <Column field="source_ip" header="Source IP" /> */}
-                    <Column field="billMsisdn" header="Bill Msisdn" />
+                    {/* <Column field="billMsisdn" header="Bill Msisdn" /> */}
                 </DataTable>
             </div>
         </div>

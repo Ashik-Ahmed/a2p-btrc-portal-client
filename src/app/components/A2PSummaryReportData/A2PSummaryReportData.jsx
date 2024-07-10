@@ -47,6 +47,8 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         { label: "PeakPrima", client_id: "PeakPrima" }
     ]
 
+    const ansTypes = [{ label: "All", ansType: "" }, { label: "MNO", ansType: "MNO" }, { label: "IPTSP", ansType: "IPTSP" }]
+
 
     const operators = [
         { label: "All", operator: "" },
@@ -88,7 +90,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
         setLoading(true);
 
-        const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType, operator: selectedOperator?.operator, cli: selectedCli?.cli }
+        const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, cli: selectedCli?.cli }
         console.log("filter: ", filter);
 
         const summaryReportData = await getA2PSummaryReport(filter)
@@ -126,7 +128,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                         <label htmlFor="client_id">Select Aggregator</label>
                     </FloatLabel>
                     <FloatLabel className="w-full">
-                        <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={["MNO", "IPTSP"]} className="border w-full" />
+                        <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" className="border w-full" />
                         <label htmlFor="ans_type">Select ANS Type</label>
                     </FloatLabel>
                     <FloatLabel className="w-full">
@@ -179,7 +181,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                     <Column field="ans_type" header="ANS Type" />
                     <Column field="operator" header="ANS Name" />
                     <Column field="cli" header="CLI" />
-                    <Column field="message_type" header="Content Type" />
+                    <Column field="message_type" header="Message Type" />
                     {/* <Column field="rn_code" header="RN Code" /> */}
                     <Column body={smsCountBodyTemplate} header="SMS Count" />
                     <Column field="dipping_count" header="Dipping Count" />

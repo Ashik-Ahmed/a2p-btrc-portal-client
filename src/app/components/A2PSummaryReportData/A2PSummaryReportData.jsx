@@ -6,21 +6,28 @@ import { InputIcon } from 'primereact/inputicon';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { InputText } from 'primereact/inputtext';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FilterMatchMode } from 'primereact/api';
 import { Dropdown } from 'primereact/dropdown';
 import { FloatLabel } from 'primereact/floatlabel';
 import { Button } from 'primereact/button';
 import { getA2PSummaryReport } from '@/app/serverActions/report';
+import { getCliList } from '@/app/serverActions/othersData';
+import { Calendar } from 'primereact/calendar';
+import { Controller, useForm } from 'react-hook-form';
 
 const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
+    const { register, control, formState: { errors }, handleSubmit, reset } = useForm();
+
     const [reportData, setReportData] = useState(a2pSummaryReport);
     const [loading, setLoading] = useState(false);
+    const [filterDate, setFilterDate] = useState(null);
     const [selectedAggregator, setSelectedAggregator] = useState(null);
     const [selectedOperator, setSelectedOperator] = useState(null);
     const [selectedAnsType, setSelectedAnsType] = useState(null);
     const [selectedCli, setSelectedCli] = useState(null);
+    const [cliList, setCliList] = useState([]);
 
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [filters, setFilters] = useState({
@@ -88,9 +95,10 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
     const getSummaryReport = async () => {
 
+        console.log(filterDate);
         setLoading(true);
 
-        const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, cli: selectedCli?.cli }
+        const filter = { start_date: filterDate[0], end_date: filterDate[1], client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, cli: selectedCli?.cli }
         console.log("filter: ", filter);
 
         const summaryReportData = await getA2PSummaryReport(filter)
@@ -117,30 +125,68 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         );
     }
 
+    const getCliData = async () => {
+        const cliList = await getCliList();
+        setCliList(cliList?.data);
+    }
+
+    useEffect(() => {
+        getCliData();
+    }, []);
+
 
     return (
         <div>
             <div className=' px-4 py-2 my-2 bg-white rounded'>
                 <h2 className='uppercase text-xl font-light text-graydark'>Filter Options</h2>
-                <div className='grid gap-2 md:flex md:gap-x-2 mt-8'>
-                    <FloatLabel className="w-full">
-                        <Dropdown inputId="client_id" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" className="border w-full" />
-                        <label htmlFor="client_id">Select Aggregator</label>
+                <form onSubmit={handleSubmit(getSummaryReport)} className='mt-8'>
+
+                    <FloatLabel className="w-1/3 mb-2">
+                        <Controller
+                            name="filterDate"
+                            control={control}
+                            rules={{ required: "Date range is required" }}
+                            render={({ field }) => (
+                                <Calendar
+                                    {...field}
+                                    dateFormat="yy-mm-dd"
+                                    value={filterDate}
+                                    onChange={(e) => {
+                                        setFilterDate(e.value);
+                                        field.onChange(e.value);
+                                    }}
+                                    showButtonBar
+                                    selectionMode="range"
+                                    readOnlyInput
+                                    hideOnRangeSelection
+                                    className='border w-full p-2 text-gray-700'
+                                />
+                            )}
+                        />
+                        <label htmlFor="filterDate">Date Range</label>
+                        {errors.filterDate && <span className='text-xs text-red' role="alert">{errors.filterDate.message}</span>}
                     </FloatLabel>
-                    <FloatLabel className="w-full">
-                        <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" className="border w-full" />
-                        <label htmlFor="ans_type">Select ANS Type</label>
-                    </FloatLabel>
-                    <FloatLabel className="w-full">
-                        <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" className="border w-full" />
-                        <label htmlFor="operator">Select ANS</label>
-                    </FloatLabel>
-                    <FloatLabel className="w-full">
-                        <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliData} optionLabel="label" className="border w-full" />
-                        <label htmlFor="cli">Select CLI</label>
-                    </FloatLabel>
-                    <button onClick={getSummaryReport} className="bg-sky-500 text-white w-full rounded"> Search </button>
-                </div>
+                    <div className='grid gap-2 md:flex md:gap-x-2 mt-6'>
+                        <FloatLabel className="w-full">
+                            <Dropdown inputId="client_id" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" className="border w-full" />
+                            <label htmlFor="client_id">Select Aggregator</label>
+                        </FloatLabel>
+                        <FloatLabel className="w-full">
+                            <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" className="border w-full" />
+                            <label htmlFor="ans_type">Select ANS Type</label>
+                        </FloatLabel>
+                        <FloatLabel className="w-full">
+                            <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" className="border w-full" />
+                            <label htmlFor="operator">Select ANS</label>
+                        </FloatLabel>
+                        <FloatLabel className="w-full">
+                            <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" className="border w-full" />
+                            <label htmlFor="cli">Select CLI</label>
+                        </FloatLabel>
+                        <button type='submit' className="bg-sky-500 text-white w-full rounded"> Search </button>
+
+                    </div>
+                </form>
             </div>
             <div className='px-4 py-2 bg-white rounded shadow-md'>
                 <div className='flex justify-between items-center mb-2'>

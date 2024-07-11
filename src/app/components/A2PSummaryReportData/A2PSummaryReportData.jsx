@@ -121,7 +121,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
     return (
         <div>
             <div className=' px-4 py-2 my-2 bg-white rounded'>
-                <h2 className='uppercase text-xl font-thin text-graydark'>Filter Options</h2>
+                <h2 className='uppercase text-xl font-light text-graydark'>Filter Options</h2>
                 <div className='grid gap-2 md:flex md:gap-x-2 mt-8'>
                     <FloatLabel className="w-full">
                         <Dropdown inputId="client_id" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" className="border w-full" />
@@ -139,12 +139,12 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                         <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliData} optionLabel="label" className="border w-full" />
                         <label htmlFor="cli">Select CLI</label>
                     </FloatLabel>
-                    <button onClick={getSummaryReport} className="bg-sky-500 text-white w-full"> Search </button>
+                    <button onClick={getSummaryReport} className="bg-sky-500 text-white w-full rounded"> Search </button>
                 </div>
             </div>
             <div className='px-4 py-2 bg-white rounded shadow-md'>
                 <div className='flex justify-between items-center mb-2'>
-                    <h1 className='uppercase text-xl font-thin text-graydark'>A2P Summary Report</h1>
+                    <h1 className='uppercase text-xl font-light text-graydark'>A2P Summary Report</h1>
                     <div className="relative">
                         <input
                             onChange={onGlobalFilterChange}
@@ -185,7 +185,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                     {/* <Column field="rn_code" header="RN Code" /> */}
                     <Column body={smsCountBodyTemplate} header="SMS Count" />
                     <Column field="dipping_count" header="Dipping Count" />
-                    {/* <Column field="source_ip" header="Source IP" /> */}
+                    <Column field="source_ip" header="Source IP" />
                     {/* <Column field="billMsisdn" header="Bill Msisdn" /> */}
                 </DataTable>
             </div>

@@ -38,7 +38,7 @@ const menuGroups = [
         ],
     },
     {
-        name: "Reports",
+        name: "REPORTS",
         menuItems: [
             {
                 icon: "",

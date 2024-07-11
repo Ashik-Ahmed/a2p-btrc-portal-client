@@ -126,13 +126,14 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
     }
 
     const getCliData = async () => {
-        const cliList = await getCliList();
+        const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator }
+        const cliList = await getCliList(filter);
         setCliList(cliList?.data);
     }
 
     useEffect(() => {
         getCliData();
-    }, []);
+    }, [selectedAggregator, selectedAnsType, selectedOperator]);
 
 
     return (

@@ -26,6 +26,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
     const [selectedAggregator, setSelectedAggregator] = useState(null);
     const [selectedOperator, setSelectedOperator] = useState(null);
     const [selectedAnsType, setSelectedAnsType] = useState(null);
+    const [selectedMessageType, setSelectedMessageType] = useState(null);
     const [selectedCli, setSelectedCli] = useState(null);
     const [cliList, setCliList] = useState([]);
 
@@ -56,6 +57,8 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
 
     const ansTypes = [{ label: "All", ansType: "" }, { label: "MNO", ansType: "MNO" }, { label: "IPTSP", ansType: "IPTSP" }]
 
+    const messageTypes = [{ label: "All", messageType: "" }, { label: "T - Transactional", messageType: "T" }, { label: "P - Promotional", messageType: "P" }]
+
 
     const operators = [
         { label: "All", operator: "" },
@@ -69,36 +72,12 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         { label: "ADN", operator: "ADN" }
     ]
 
-    const cliData = [
-        { label: "All", cli: "" },
-        { label: "SONALI BANK", cli: "SONALI BANK" },
-        { label: "BD Customs", cli: "BD Customs" },
-        { label: "KLUBHAUS BD", cli: "KLUBHAUS BD" },
-        { label: "UCB", cli: "UCB" },
-        { label: "01969901070", cli: "01969901070" },
-        { label: "KRISHI BANK", cli: "KRISHI BANK" },
-        { label: "Apex", cli: "Apex" },
-        { label: "IDRAMETLIFE", cli: "IDRAMETLIFE" },
-        { label: "CITY BANK", cli: "CITY BANK" },
-        { label: "IDRA_SONALI", cli: "IDRA_SONALI" },
-        { label: "VoguePrince", cli: "VoguePrince" },
-        { label: "AKASH DTH", cli: "AKASH DTH" },
-        { label: "01969910557", cli: "01969910557" },
-        { label: "Pizza.Hut", cli: "Pizza.Hut" },
-        { label: "Unimart", cli: "Unimart" },
-        { label: "GuardianLYF", cli: "GuardianLYF" },
-        { label: "KFC BD", cli: "KFC BD" },
-        { label: "DBH", cli: "DBH" },
-        { label: "SCHOLASTICA", cli: "SCHOLASTICA" },
-        { label: "bKashNotice", cli: "bKashNotice" },
-    ]
-
     const getSummaryReport = async () => {
 
         console.log(filterDate);
         setLoading(true);
 
-        const filter = { start_date: filterDate[0], end_date: filterDate[1], client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, cli: selectedCli?.cli }
+        const filter = { start_date: filterDate[0], end_date: filterDate[1], client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, message_type: selectedMessageType?.messageType, cli: selectedCli?.cli }
         console.log("filter: ", filter);
 
         const summaryReportData = await getA2PSummaryReport(filter)
@@ -142,7 +121,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                 <h2 className='uppercase text-xl font-light text-graydark'>Filter Options</h2>
                 <form onSubmit={handleSubmit(getSummaryReport)} className='mt-8'>
 
-                    <FloatLabel className="w-1/3 mb-2">
+                    <FloatLabel className="w-1/5 mb-2">
                         <Controller
                             name="filterDate"
                             control={control}
@@ -169,22 +148,26 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                     </FloatLabel>
                     <div className='grid gap-2 md:flex md:gap-x-2 mt-6'>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="client_id" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" className="border w-full" />
-                            <label htmlFor="client_id">Select Aggregator</label>
+                            <Dropdown inputId="client_id" size="small" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" showClear className="border w-full" />
+                            <label htmlFor="client_id">Aggregator</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" className="border w-full" />
-                            <label htmlFor="ans_type">Select ANS Type</label>
+                            <Dropdown inputId="ans_type" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" showClear className="border w-full" />
+                            <label htmlFor="ans_type">ANS Type</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" className="border w-full" />
-                            <label htmlFor="operator">Select ANS</label>
+                            <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" showClear className="border w-full" />
+                            <label htmlFor="operator">ANS Name</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" className="border w-full" />
-                            <label htmlFor="cli">Select CLI</label>
+                            <Dropdown inputId="message_type" value={selectedMessageType} onChange={(e) => setSelectedMessageType(e.value)} options={messageTypes} optionLabel="label" showClear className="border w-full" />
+                            <label htmlFor="message_type">Message Type</label>
                         </FloatLabel>
-                        <button type='submit' className="bg-sky-500 text-white w-full rounded"> Search </button>
+                        <FloatLabel className="w-full">
+                            <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" showClear className="border w-full" />
+                            <label htmlFor="cli">CLI</label>
+                        </FloatLabel>
+                        <button type='submit' className="bg-sky-500 text-white w-[450px] rounded"> Search </button>
 
                     </div>
                 </form>
@@ -224,7 +207,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                     filters={filters} filterDisplay="menu" globalFilterFields={['client_id', 'operator', 'cli', 'billMsisdn']}
                     emptyMessage="No data found" loading={loading} className="custom-header report-table">
                     <Column field="client_id" header="Aggregator" />
-                    <Column field="delivery_date" header="Date" />
+                    <Column field="delivery_date" header="Delivery Date" />
                     <Column field="ans_type" header="ANS Type" />
                     <Column field="operator" header="ANS Name" />
                     <Column field="cli" header="CLI" />

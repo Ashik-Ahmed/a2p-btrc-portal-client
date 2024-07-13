@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import profilePic from '../../../public/images/user.png'; // replace with your actual profile image
-import { FaCheck, FaLanguage, FaLocationDot, FaPhone, FaRegStar, FaRegUser } from "react-icons/fa6";
+import { FaCheck, FaLanguage, FaLocationDot, FaPhone, FaRegStar, FaRegUser, FaUserPen } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 import { auth } from '@/auth';
 
 
@@ -27,9 +28,20 @@ export default async function ProfilePage() {
                     </div>
                 </div>
 
+
+
+                <div className="flex items-center justify-start gap-x-2 w-full mt-16">
+                    <button className="flex items-center gap-x-2 bg-primary/90 hover:bg-primary text-white text-sm py-1 px-1.5 rounded ">
+                        <FaUserPen size={18} />
+                        Edit Profile</button>
+                    <button className="flex items-center gap-x-2 bg-primary/90 hover:bg-primary text-white text-sm py-1 px-1.5 rounded">
+                        <RiLockPasswordLine size={18} />
+                        Update Password</button>
+                </div>
+
                 {/* Main Content */}
 
-                <div className="flex flex-col md:flex-row md:space-x-6 mt-20">
+                <div className="flex flex-col md:flex-row md:space-x-6 mt-6">
                     {/* Profile Info */}
                     <div className="w-full md:w-1/3 bg-white p-4 rounded-md shadow-lg">
                         <div className="rounded-lg">

@@ -2,10 +2,16 @@ import Image from 'next/image';
 import profilePic from '../../../public/images/user.png'; // replace with your actual profile image
 import { FaCheck, FaLanguage, FaLocationDot, FaPhone, FaRegStar, FaRegUser } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
+import { auth } from '@/auth';
 
 
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+
+    const session = await auth();
+    const user = await fetch(`http://localhost:5000/api/v1/user/${session?.user?._id}`).then(res => res.json());
+    console.log("user: ", user?.data);
+
     return (
         <div>
             <div className="max-w-6xl mx-auto">
@@ -13,10 +19,10 @@ export default function ProfilePage() {
                 <div className="relative flex items-center h-48 bg-gradient-to-r from-teal-300 via-pink-300 to-yellow-300 rounded-t-md">
                     <div className="md:flex items-center absolute top-36 w-full bg-white h-24 rounded-b-md border-white shadow-lg">
                         <div className='flex justify-center items-center mx-auto md:mx-0 md:ml-6 -mt-18 w-30 h-30 border-4 border-white rounded-md bg-white'>
-                            <Image src={profilePic} alt="Profile Picture" className="rounded w-28 h-28" />
+                            <Image src={user?.data?.photo || profilePic} width={100} height={100} alt="Profile Picture" className="rounded w-28 h-28" />
                         </div>
                         <div className='mt-2 md:-mt-12 md:ml-6'>
-                            <h3 className='text-2xl font-semibold text-gray-600 text-center'>Ashik Ahmed</h3>
+                            <h3 className='text-2xl font-semibold text-gray-600 text-center'>{user?.data?.name}</h3>
                         </div>
                     </div>
                 </div>
@@ -31,39 +37,39 @@ export default function ProfilePage() {
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <FaRegUser size={18} />
                                 <p className='font-semibold'>Full Name:</p>
-                                <p> John Doe</p>
+                                <p> {user?.data?.name}</p>
                             </div>
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <FaCheck size={18} />
                                 <p className='font-semibold'>Status:</p>
-                                <p> Active</p>
+                                <p> {user?.data?.status}</p>
                             </div>
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <FaRegStar size={18} />
                                 <p className='font-semibold'>Role:</p>
-                                <p> Developer</p>
+                                <p> {user?.data?.role}</p>
                             </div>
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <FaLanguage size={18} />
                                 <p className='font-semibold'>Language:</p>
-                                <p> Bengali, English</p>
+                                <p> {user?.data?.language || "Bengali, English"}</p>
                             </div>
 
                             <h3 className="text-lg font-light text-gray-400 mt-8">CONTACT</h3>
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <FaPhone size={18} />
                                 <p className='font-semibold'>Phone:</p>
-                                <p> (123) 456-7890</p>
+                                <p> {user?.data?.phone}</p>
                             </div>
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <MdOutlineEmail size={20} />
                                 <p className='font-semibold'>Email:</p>
-                                <p> john.doe@example.com</p>
+                                <p> {user?.data?.email}</p>
                             </div>
                             <div className="flex gap-x-2 items-center mt-2 text-gray-600">
                                 <FaLocationDot size={18} />
                                 <p className='font-semibold'>Address:</p>
-                                <p> Dhaka, Bangladesh</p>
+                                <p> {user?.data?.address}</p>
                             </div>
                         </div>
                     </div>

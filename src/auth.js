@@ -34,7 +34,7 @@ export const {
 
                 const { email, password } = credentials;
                 try {
-                    const res = await fetch('http://localhost:5000/api/v1/user/login', {
+                    const res = await fetch(`${process.env.API_SERVER_URL}/auth/login}`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

@@ -4,7 +4,7 @@ import formatNumberBD from '@/utils/numberFormat'
 
 const WeeklyData = async () => {
 
-    const data = await fetch('http://localhost:5000/api/v1/dashboard/weeklyData', {
+    const data = await fetch(`${process.env.API_SERVER_URL}/dashboard/weeklyData`, {
         cache: 'no-store'
     })
     const weeklyData = await data.json()

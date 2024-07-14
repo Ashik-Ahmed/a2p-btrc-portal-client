@@ -35,7 +35,7 @@ const Profile = ({ user }) => {
             return;
         }
 
-        fetch(`http://localhost:5000/api/v1/user/updatePassword/${user?.data?.user_id}`, {
+        fetch(`process.env.API_SERVER_URL/user/updatePassword/${user?.data?.user_id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

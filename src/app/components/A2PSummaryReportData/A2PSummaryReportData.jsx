@@ -90,6 +90,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
     }
     const getAggregatorData = async () => {
         const aggregatorList = await getAggregatorList();
+
         setAggregatorList(aggregatorList?.data);
     }
 

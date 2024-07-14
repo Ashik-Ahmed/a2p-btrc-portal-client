@@ -15,19 +15,23 @@ export async function doLogout() {
 }
 
 export async function doCredentialLogin(formData) {
+    console.log("doCredentialLogin called", formData.get('email'), formData.get('password'));
     try {
         const email = formData.get('email')
         const password = formData.get('password')
+        console.log("email: ", email, " password: ", password);
         const response = await signIn("credentials", { email, password, redirect: false })
 
-        if (response.error) {
-            throw new Error(response.error);
+        console.log("doCredentialLogin response: ", response);
+
+        if (response?.error) {
+            return new Error(response.error);
         }
 
         return response;
 
     } catch (error) {
         console.log("throwing error: ", error);
-        throw new Error(error)
+        return new Error(error)
     }
 }

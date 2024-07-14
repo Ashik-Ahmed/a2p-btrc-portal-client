@@ -40,7 +40,8 @@ const LoginForm = () => {
             }
         } catch (error) {
             console.log("Login error: ", error);
-            setLoginError("Wrong Credentials")
+            // setLoginError("Wrong Credentials")
+            setLoginError(error.message)
             // throw new Error(error.message)
         }
         setLoading(false)

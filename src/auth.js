@@ -33,15 +33,16 @@ export const {
                 // }
 
                 const { email, password } = credentials;
+                console.log("Inside authorize: ", email, password);
                 try {
-                    const res = await fetch(`${process.env.API_SERVER_URL}/auth/login}`, {
+                    const res = await fetch(`${process.env.API_SERVER_URL}/user/login`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
                         },
                         body: JSON.stringify({
-                            email,
-                            password
+                            email: credentials?.email,
+                            password: credentials?.password
                         })
                     })
                     const data = await res.json();
@@ -50,7 +51,13 @@ export const {
                         // return data.data.employee;
                         console.log("db employee: ", data?.data);
                         const employee = data?.data;
-                        return employee;
+                        return {
+                            ...employee,
+                            role: employee.role || '', // ensure it's a plain object
+                            user_id: employee.user_id || '',
+                            photo: employee.photo || '',
+                            accessToken: employee.accessToken || ''
+                        };
                     }
                     else {
                         throw new Error(data?.message || 'Login failed'); //send the error
@@ -71,10 +78,10 @@ export const {
             // console.log("inside jwt user: ", user);
             // console.log("inside jwt token: ", token);
             if (user) {
-                token.role = user.role;
-                token._id = user.user_id;
-                token.photo = user.photo;
-                token.accessToken = user.accessToken
+                token.role = user.role || '';
+                token._id = user.user_id || '';
+                token.photo = user.photo || '';
+                token.accessToken = user.accessToken || '';
             }
             return token;
         },
@@ -82,10 +89,10 @@ export const {
             // console.log("user is: ", session?.user);
             // console.log("token is: ", token);
             if (session?.user) {
-                session.user.role = token.role;
-                session.user._id = token._id;
-                session.user.photo = token.photo;
-                session.user.accessToken = token.accessToken
+                session.user.role = token.role || '';
+                session.user._id = token._id || '';
+                session.user.photo = token.photo || '';
+                session.user.accessToken = token.accessToken || '';
             }
             // console.log("session is: ", session);
             return session;

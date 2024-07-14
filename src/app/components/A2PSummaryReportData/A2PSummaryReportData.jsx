@@ -12,7 +12,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { FloatLabel } from 'primereact/floatlabel';
 import { Button } from 'primereact/button';
 import { getA2PSummaryReport } from '@/app/serverActions/report';
-import { getCliList } from '@/app/serverActions/othersData';
+import { getAggregatorList, getCliList } from '@/app/serverActions/othersData';
 import { Calendar } from 'primereact/calendar';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -28,6 +28,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
     const [selectedAnsType, setSelectedAnsType] = useState(null);
     const [selectedMessageType, setSelectedMessageType] = useState(null);
     const [selectedCli, setSelectedCli] = useState(null);
+    const [aggregatorList, setAggregatorList] = useState([]);
     const [cliList, setCliList] = useState([]);
 
     const [globalFilterValue, setGlobalFilterValue] = useState('');
@@ -38,22 +39,6 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         cli: { value: null, matchMode: FilterMatchMode.CONTAINS },
         billMsisdn: { value: null, matchMode: FilterMatchMode.CONTAINS }
     });
-
-
-    const aggregators = [
-        { label: "All", client_id: "" },
-        { label: "SSL", client_id: "SSL" },
-        { label: "Dotlines", client_id: "Dotlines" },
-        { label: "ADN_Diginet", client_id: "ADN_Diginet" },
-        { label: "Route_Mobile", client_id: "Route_Mobile" },
-        { label: "Doer_Services", client_id: "Doer_Services" },
-        { label: "REVE", client_id: "REVE" },
-        { label: "Infobip", client_id: "Infobip" },
-        { label: "RT_Communications", client_id: "RT_Communications" },
-        { label: "Wintel", client_id: "Wintel" },
-        { label: "Elitbuzz", client_id: "Elitbuzz" },
-        { label: "PeakPrima", client_id: "PeakPrima" }
-    ]
 
     const ansTypes = [{ label: "All", ansType: "" }, { label: "MNO", ansType: "MNO" }, { label: "IPTSP", ansType: "IPTSP" }]
 
@@ -103,12 +88,20 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
             </div>
         );
     }
+    const getAggregatorData = async () => {
+        const aggregatorList = await getAggregatorList();
+        setAggregatorList(aggregatorList?.data);
+    }
 
     const getCliData = async () => {
         const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator }
         const cliList = await getCliList(filter);
         setCliList(cliList?.data);
     }
+
+    useEffect(() => {
+        getAggregatorData();
+    }, []);
 
     useEffect(() => {
         getCliData();
@@ -148,7 +141,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
                     </FloatLabel>
                     <div className='grid gap-2 md:flex md:gap-x-2 mt-6'>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="client_id" size="small" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregators} optionLabel="label" showClear className="border w-full" />
+                            <Dropdown inputId="client_id" size="small" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregatorList} optionLabel="client_id" showClear className="border w-full" />
                             <label htmlFor="client_id">Aggregator</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">

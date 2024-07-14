@@ -20,16 +20,16 @@ const menuGroups = [
                 route: "/",
 
             },
-            {
-                icon: "",
-                label: "Home",
-                route: "/home",
-            },
-            {
-                icon: "",
-                label: "Client Page",
-                route: "/client-page",
-            },
+            // {
+            //     icon: "",
+            //     label: "Home",
+            //     route: "/home",
+            // },
+            // {
+            //     icon: "",
+            //     label: "Client Page",
+            //     route: "/client-page",
+            // },
             {
                 icon: "",
                 label: "Manage Users",
@@ -46,42 +46,42 @@ const menuGroups = [
                 route: "/a2p-summary-report",
 
             },
-            {
-                icon: "",
-                label: "A2P Details Report",
-                route: "/a2p-details-report",
+            // {
+            //     icon: "",
+            //     label: "A2P Details Report",
+            //     route: "/a2p-details-report",
 
-            },
+            // },
         ],
     },
-    {
-        name: "OTHERS",
-        menuItems: [
-            {
-                icon: "",
-                label: "Chart",
-                route: "/chart",
-            },
-            {
-                icon: "",
-                label: "UI Elements",
-                route: "#",
-                children: [
-                    { label: "Alerts", route: "/ui/alerts" },
-                    { label: "Buttons", route: "/ui/buttons" },
-                ],
-            },
-            {
-                icon: "",
-                label: "Authentication",
-                route: "#",
-                children: [
-                    { label: "Sign In", route: "/auth/signin" },
-                    { label: "Sign Up", route: "/auth/signup" },
-                ],
-            },
-        ],
-    },
+    // {
+    //     name: "OTHERS",
+    //     menuItems: [
+    //         {
+    //             icon: "",
+    //             label: "Chart",
+    //             route: "/chart",
+    //         },
+    //         {
+    //             icon: "",
+    //             label: "UI Elements",
+    //             route: "#",
+    //             children: [
+    //                 { label: "Alerts", route: "/ui/alerts" },
+    //                 { label: "Buttons", route: "/ui/buttons" },
+    //             ],
+    //         },
+    //         {
+    //             icon: "",
+    //             label: "Authentication",
+    //             route: "#",
+    //             children: [
+    //                 { label: "Sign In", route: "/auth/signin" },
+    //                 { label: "Sign Up", route: "/auth/signup" },
+    //             ],
+    //         },
+    //     ],
+    // },
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {

@@ -14,8 +14,7 @@ const ManageUsers = ({ users }) => {
             <div className='flex justify-between items-center my-2'>
                 <div className='flex items-center gap-x-2'>
                     <h1 className='text-2xl font-semibold text-boxdark'>Manage Users</h1>
-                    <button onClick={() => setAddUserDialog(true)} className='bg-primary text-white px-2 py-1 rounded'>+ Add User</button>
-                    <Button severity='danger' size='small' label="Export" icon="pi pi-upload" />
+                    {/* <button onClick={() => setAddUserDialog(true)} className='bg-primary text-white px-2 py-1 rounded'>+ Add User</button> */}
                 </div>
                 <div className="relative">
                     <input

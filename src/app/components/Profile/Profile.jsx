@@ -8,12 +8,57 @@ import { FaCheck, FaLanguage, FaLocationDot, FaPhone, FaRegStar, FaRegUser, FaUs
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Dialog } from 'primereact/dialog';
+import { useForm } from 'react-hook-form';
 
 const Profile = ({ user }) => {
+    console.log("user: ", user);
+    const { register, control, formState: { errors }, handleSubmit, reset } = useForm();
+
+
     const [updatePasswordDialog, setUpdatePasswordDialog] = useState(false);
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [passwordChangeError, setPasswordChangeError] = useState(null);
+
+    const handleUpdatePassword = (data) => {
+        console.log("Update Password data: ", data);
+        setPasswordChangeError(null);
+
+        if (data.newPassword !== data.confirmPassword) {
+            setPasswordChangeError("New Passwords didn't match");
+            return;
+        }
+
+        if (data?.newPassword?.length < 8) {
+            setPasswordChangeError("Password must be at least 8 characters long");
+            return;
+        }
+
+        fetch(`http://localhost:5000/api/v1/user/updatePassword/${user?.data?.user_id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data?.status === "Success") {
+
+                    setShowCurrentPassword(false);
+                    setShowNewPassword(false);
+                    setShowConfirmPassword(false);
+                    setUpdatePasswordDialog(false);
+                    reset();
+                } else {
+                    setPasswordChangeError(data?.message);
+                }
+            })
+            .catch(err => {
+                setPasswordChangeError(err?.message);
+            })
+    }
 
 
     return (
@@ -29,8 +74,6 @@ const Profile = ({ user }) => {
                     </div>
                 </div>
             </div>
-
-
 
             <div className="flex items-center justify-start gap-x-2 w-full mt-16">
                 <button className="flex items-center gap-x-2 bg-primary/90 hover:bg-primary text-white text-sm py-1 px-1.5 rounded ">
@@ -97,20 +140,26 @@ const Profile = ({ user }) => {
                         Maxime alias fugit recusandae consectetur eius nemo enim minima aspernatur necessitatibus rerum? Voluptas reiciendis eaque labore facere suscipit sapiente rerum maxime porro quaerat! Consequatur, ea sit eum facilis eaque dolore.</p>
                 </div>
             </div>
-            <Dialog header="Update Password" visible={updatePasswordDialog} onHide={() => { if (!updatePasswordDialog) return; setUpdatePasswordDialog(false); }}
+            <Dialog header="Update Password" visible={updatePasswordDialog} onHide={() => { if (!updatePasswordDialog) return; setUpdatePasswordDialog(false); setPasswordChangeError(null); setShowCurrentPassword(false); setShowNewPassword(false); setShowConfirmPassword(false); reset() }}
                 style={{ width: '50vw', margin: '1rem' }} breakpoints={{ '960px': '75vw', '641px': '100vw' }}>
-                <form>
+                {
+                    passwordChangeError &&
+                    <div className='mb-2 text-center'>
+                        <p className='text-white bg-red'>{passwordChangeError}</p>
+                    </div>
+                }
+                <form onSubmit={handleSubmit(handleUpdatePassword)}>
                     <div className="mb-4 relative">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="current-password">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="currentPassword">
                             Current Password
                         </label>
                         <div className="relative">
                             <input
-                                id='current-password'
+                                {...register('currentPassword', { required: "Current password is required" })}
+                                id='currentPassword'
                                 type={showCurrentPassword ? 'text' : 'password'}
                                 placeholder="Enter Current password"
-                                className="w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                            />
+                                className={`${errors.currentPassword && 'border-red'} w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`} />
                             <button
                                 type="button"
                                 onClick={() => setShowCurrentPassword(!showCurrentPassword)}
@@ -122,19 +171,21 @@ const Profile = ({ user }) => {
                                     <FaEye className="h-5 w-5 text-gray-600" />
                                 )}
                             </button>
+                            {errors.currentPassword && <span className='text-red text-xs' role="alert">{errors.currentPassword.message}</span>}
                         </div>
                     </div>
 
                     <div className="mb-4 relative">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="new-password">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="newPassword">
                             New Password
                         </label>
                         <div className="relative">
                             <input
-                                id='new-password'
+                                {...register('newPassword', { required: "New password is required" })}
+                                id='newPassword'
                                 type={showNewPassword ? 'text' : 'password'}
                                 placeholder="Enter new password"
-                                className="w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                                className={`${errors.newPassword && 'border-red'} w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
                             />
                             <button
                                 type="button"
@@ -148,22 +199,21 @@ const Profile = ({ user }) => {
                                 )}
                             </button>
                         </div>
+                        {errors.newPassword && <span className='text-red text-xs' role="alert">{errors.newPassword.message}</span>}
                     </div>
 
                     <div className="mb-6 relative">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirm-password">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
                             Confirm New Password
                         </label>
                         <div className="relative">
                             <input
-                                id='confirm-password'
+                                {...register('confirmPassword', { required: "Confirm new password is required" })}
+                                id='confirmPassword'
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 placeholder="Confirm new password"
-                                className="w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                                className={`${errors.confirmPassword && 'border-red'} w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
                             />
-
-
-
                             <button
                                 type="button"
                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -175,7 +225,7 @@ const Profile = ({ user }) => {
                                     <FaEye className="h-5 w-5 text-gray-600" />
                                 )}
                             </button>
-
+                            {errors.confirmPassword && <span className='text-red text-xs' role="alert">{errors.confirmPassword.message}</span>}
                         </div>
                     </div>
 

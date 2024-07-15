@@ -1,7 +1,8 @@
+"use client";
+
 import React from 'react'
 import notFoundImage from '../../public/images/error-page.webp'
 import Image from 'next/image';
-import Link from 'next/link';
 
 const notFound = () => {
     return (
@@ -10,7 +11,7 @@ const notFound = () => {
             <h2 className='text-2xl font-bold text-boxdark mt-4 lg:mt-8'>Sorry, the page can’t be found</h2>
             <p className='my-2'>The page you were looking for appears to have been moved, deleted or does not exist.</p>
             <div className='my-4 flex justify-center'>
-                <Link className="bg-primary rounded-md text-white p-2" href="/"> <i className="pi pi-arrow-left"></i> Back to Dashboard </Link>
+                <button onClick={() => window.location.href = "/"} className="bg-primary rounded-md text-white p-2"> <i className="pi pi-arrow-left"></i> Back to Dashboard </button>
             </div>
         </div>
     )

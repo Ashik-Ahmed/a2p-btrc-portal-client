@@ -159,7 +159,7 @@ const Profile = ({ user }) => {
                                 id='currentPassword'
                                 type={showCurrentPassword ? 'text' : 'password'}
                                 placeholder="Enter Current password"
-                                className={`${errors.currentPassword && 'border-red'} w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`} />
+                                className={`${errors.currentPassword ? 'border-red' : ' border-stroke'} w-full rounded border bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none `} />
                             <button
                                 type="button"
                                 onClick={() => setShowCurrentPassword(!showCurrentPassword)}
@@ -185,7 +185,7 @@ const Profile = ({ user }) => {
                                 id='newPassword'
                                 type={showNewPassword ? 'text' : 'password'}
                                 placeholder="Enter new password"
-                                className={`${errors.newPassword && 'border-red'} w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
+                                className={`${errors.newPassword ? 'border-red' : ' border-stroke'} w-full rounded border bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
                             />
                             <button
                                 type="button"
@@ -212,7 +212,7 @@ const Profile = ({ user }) => {
                                 id='confirmPassword'
                                 type={showConfirmPassword ? 'text' : 'password'}
                                 placeholder="Confirm new password"
-                                className={`${errors.confirmPassword && 'border-red'} w-full rounded border border-stroke bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
+                                className={`${errors.confirmPassword ? 'border-red' : ' border-stroke'} w-full rounded border bg-transparent py-1.5 pl-4 pr-8 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
                             />
                             <button
                                 type="button"

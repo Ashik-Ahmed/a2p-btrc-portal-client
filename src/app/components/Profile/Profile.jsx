@@ -9,9 +9,13 @@ import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Dialog } from 'primereact/dialog';
 import { useForm } from 'react-hook-form';
+import { updatePassword } from '@/app/serverActions/userActions';
+import { useSession } from 'next-auth/react';
 
 const Profile = ({ user }) => {
-    console.log("user: ", user);
+
+    const { data: userData, status } = useSession();
+
     const { register, control, formState: { errors }, handleSubmit, reset } = useForm();
 
 
@@ -21,7 +25,7 @@ const Profile = ({ user }) => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [passwordChangeError, setPasswordChangeError] = useState(null);
 
-    const handleUpdatePassword = (data) => {
+    const handleUpdatePassword = async (data) => {
         console.log("Update Password data: ", data);
         setPasswordChangeError(null);
 
@@ -35,29 +39,20 @@ const Profile = ({ user }) => {
             return;
         }
 
-        fetch(`${process.env.API_SERVER_URL}/user/updatePassword/${user?.data?.user_id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data?.status === "Success") {
+        console.log("user access Token: ", user);
 
-                    setShowCurrentPassword(false);
-                    setShowNewPassword(false);
-                    setShowConfirmPassword(false);
-                    setUpdatePasswordDialog(false);
-                    reset();
-                } else {
-                    setPasswordChangeError(data?.message);
-                }
-            })
-            .catch(err => {
-                setPasswordChangeError(err?.message);
-            })
+        const updatePasswordResult = await updatePassword(user?.data?.user_id, userData?.user?.accessToken, data);
+        console.log("updatePasswordResult: ", updatePasswordResult);
+        if (updatePasswordResult?.status === "Success") {
+
+            setShowCurrentPassword(false);
+            setShowNewPassword(false);
+            setShowConfirmPassword(false);
+            setUpdatePasswordDialog(false);
+            reset();
+        } else {
+            setPasswordChangeError(updatePasswordResult?.message);
+        }
     }
 
 

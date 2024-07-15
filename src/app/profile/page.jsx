@@ -12,7 +12,7 @@ export default async function ProfilePage() {
         {
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${user?.accessToken}`
+                'Authorization': `Bearer ${user?.accessToken}`
             }
         }
     ).then(res => res.json());

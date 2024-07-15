@@ -1,20 +1,13 @@
 import React from 'react'
 import TopClients from '../components/TopClients/TopClients'
+import { auth } from '@/auth'
 
 const TopClientsData = async () => {
 
-    // const topAggregatorsData = await fetch('process.env.API_SERVER_URL/dashboard/topAggregator?interval=7', {
-    //     cache: 'no-store'
-    // })
-    // const topAggregators = await topAggregatorsData.json()
-
-    // const topAnsData = await fetch('process.env.API_SERVER_URL/dashboard/topANS?interval=7', {
-    //     cache: 'no-store'
-    // })
-    // const topAns = await topAnsData.json()
+    const { user } = await auth()
 
     return (
-        <TopClients />
+        <TopClients accessToken={user?.accessToken} />
     )
 }
 

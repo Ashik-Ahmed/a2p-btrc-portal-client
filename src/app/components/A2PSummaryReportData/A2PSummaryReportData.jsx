@@ -16,11 +16,11 @@ import { getAggregatorList, getCliList } from '@/app/serverActions/othersData';
 import { Calendar } from 'primereact/calendar';
 import { Controller, useForm } from 'react-hook-form';
 
-const A2PSummaryReportData = ({ a2pSummaryReport }) => {
+const A2PSummaryReportData = ({ accessToken }) => {
 
     const { register, control, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const [reportData, setReportData] = useState(a2pSummaryReport);
+    const [reportData, setReportData] = useState();
     const [loading, setLoading] = useState(false);
     const [filterDate, setFilterDate] = useState(null);
     const [selectedAggregator, setSelectedAggregator] = useState(null);
@@ -65,7 +65,7 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         const filter = { start_date: filterDate[0], end_date: filterDate[1], client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, message_type: selectedMessageType?.messageType, cli: selectedCli?.cli }
         console.log("filter: ", filter);
 
-        const summaryReportData = await getA2PSummaryReport(filter)
+        const summaryReportData = await getA2PSummaryReport(accessToken, filter)
 
         setReportData(summaryReportData?.data)
         setLoading(false);
@@ -89,14 +89,14 @@ const A2PSummaryReportData = ({ a2pSummaryReport }) => {
         );
     }
     const getAggregatorData = async () => {
-        const aggregatorList = await getAggregatorList();
+        const aggregatorList = await getAggregatorList(accessToken);
 
         setAggregatorList(aggregatorList?.data);
     }
 
     const getCliData = async () => {
         const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator }
-        const cliList = await getCliList(filter);
+        const cliList = await getCliList(accessToken, filter);
         setCliList(cliList?.data);
     }
 

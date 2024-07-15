@@ -11,6 +11,7 @@ import { Dialog } from 'primereact/dialog';
 import { useForm } from 'react-hook-form';
 import { updatePassword } from '@/app/serverActions/userActions';
 import { useSession } from 'next-auth/react';
+import { doLogout } from '@/app/serverActions/authActions';
 
 const Profile = ({ user }) => {
 
@@ -26,7 +27,7 @@ const Profile = ({ user }) => {
     const [passwordChangeError, setPasswordChangeError] = useState(null);
 
     const handleUpdatePassword = async (data) => {
-        console.log("Update Password data: ", data);
+        // console.log("Update Password data: ", data);
         setPasswordChangeError(null);
 
         if (data.newPassword !== data.confirmPassword) {
@@ -39,10 +40,9 @@ const Profile = ({ user }) => {
             return;
         }
 
-        console.log("user access Token: ", user);
 
         const updatePasswordResult = await updatePassword(user?.data?.user_id, userData?.user?.accessToken, data);
-        console.log("updatePasswordResult: ", updatePasswordResult);
+
         if (updatePasswordResult?.status === "Success") {
 
             setShowCurrentPassword(false);
@@ -50,6 +50,7 @@ const Profile = ({ user }) => {
             setShowConfirmPassword(false);
             setUpdatePasswordDialog(false);
             reset();
+            doLogout();
         } else {
             setPasswordChangeError(updatePasswordResult?.message);
         }

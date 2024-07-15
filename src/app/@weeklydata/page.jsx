@@ -1,11 +1,18 @@
 import React from 'react'
 import DataChart from '../components/DataChart/DataChart'
 import formatNumberBD from '@/utils/numberFormat'
+import { auth } from '@/auth';
 
 const WeeklyData = async () => {
 
+    const { user } = await auth();
+
     const data = await fetch(`${process.env.API_SERVER_URL}/dashboard/weeklyData`, {
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user?.accessToken}`
+        }
     })
     const weeklyData = await data.json()
     // console.log("data: ", weeklyData?.data)

@@ -6,7 +6,7 @@ import { Column } from 'primereact/column';
 import TabMenu from './TabMenu'
 import { getTopAggregators, getTopAns } from '@/app/serverActions/dashboardActions';
 import formatNumberBD from '@/utils/numberFormat';
-const TopClients = () => {
+const TopClients = ({ accessToken }) => {
 
     const [topAggregatorLoading, setTopAggregatorLoading] = useState(false);
     const [topAnsLoading, setTopAnsLoading] = useState(false);
@@ -25,14 +25,14 @@ const TopClients = () => {
 
     const topAggregatorsData = async () => {
         setTopAggregatorLoading(true);
-        const topAggregators = await getTopAggregators(topAggregatorInterval);
+        const topAggregators = await getTopAggregators(accessToken, topAggregatorInterval);
         setTopAggregators(topAggregators);
         setTopAggregatorLoading(false);
     }
 
     const topAnsData = async () => {
         setTopAnsLoading(true);
-        const topAns = await getTopAns(topAnsInterval);
+        const topAns = await getTopAns(accessToken, topAnsInterval);
         setTopAns(topAns);
         setTopAnsLoading(false);
     }

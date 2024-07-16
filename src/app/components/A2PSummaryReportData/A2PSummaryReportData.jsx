@@ -12,7 +12,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { FloatLabel } from 'primereact/floatlabel';
 import { Button } from 'primereact/button';
 import { getA2PSummaryReport } from '@/app/serverActions/report';
-import { getAggregatorList, getCliList } from '@/app/serverActions/othersData';
+import { getAggregatorList, getAnsList, getCliList } from '@/app/serverActions/othersData';
 import { Calendar } from 'primereact/calendar';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -29,6 +29,7 @@ const A2PSummaryReportData = ({ accessToken }) => {
     const [selectedMessageType, setSelectedMessageType] = useState(null);
     const [selectedCli, setSelectedCli] = useState(null);
     const [aggregatorList, setAggregatorList] = useState([]);
+    const [ansList, setAnsList] = useState([]);
     const [cliList, setCliList] = useState([]);
 
     const [globalFilterValue, setGlobalFilterValue] = useState('');
@@ -44,18 +45,6 @@ const A2PSummaryReportData = ({ accessToken }) => {
 
     const messageTypes = [{ label: "All", messageType: "" }, { label: "T - Transactional", messageType: "T" }, { label: "P - Promotional", messageType: "P" }]
 
-
-    const operators = [
-        { label: "All", operator: "" },
-        { label: "GrameenPhone", operator: "GrameenPhone" },
-        { label: "Robi", operator: "Robi" },
-        { label: "Banglalink", operator: "Banglalink" },
-        { label: "Teletalk", operator: "Teletalk" },
-        { label: "RanksITT", operator: "RanksITT" },
-        { label: "Mirnet", operator: "Mirnet" },
-        { label: "FusionNet", operator: "FusionNet" },
-        { label: "ADN", operator: "ADN" }
-    ]
 
     const getSummaryReport = async () => {
 
@@ -94,6 +83,11 @@ const A2PSummaryReportData = ({ accessToken }) => {
         setAggregatorList(aggregatorList?.data);
     }
 
+    const getANSData = async () => {
+        const ansList = await getAnsList(accessToken);
+        setAnsList(ansList?.data);
+    }
+
     const getCliData = async () => {
         const filter = { client_id: selectedAggregator?.client_id, ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator }
         const cliList = await getCliList(accessToken, filter);
@@ -102,6 +96,7 @@ const A2PSummaryReportData = ({ accessToken }) => {
 
     useEffect(() => {
         getAggregatorData();
+        getANSData();
     }, []);
 
     useEffect(() => {
@@ -150,7 +145,7 @@ const A2PSummaryReportData = ({ accessToken }) => {
                             <label htmlFor="ans_type">ANS Type</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={operators} optionLabel="label" showClear className="border w-full" />
+                            <Dropdown inputId="operator" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={ansList} optionLabel="operator" showClear className="border w-full" />
                             <label htmlFor="operator">ANS Name</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">

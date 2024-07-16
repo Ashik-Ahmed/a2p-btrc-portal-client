@@ -6,7 +6,6 @@ import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
 import user from "../../../../public/images/user.png"
 import { doLogout } from "@/app/serverActions/authActions";
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const DropdownUser = ({ session }) => {
@@ -78,7 +77,7 @@ const DropdownUser = ({ session }) => {
               </Link>
             </li>
           </ul>
-          <button onClick={async () => await signOut()} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+          <button onClick={async () => await doLogout()} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
             Log Out
           </button>
         </div>

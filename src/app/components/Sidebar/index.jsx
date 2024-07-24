@@ -52,6 +52,11 @@ const menuGroups = [
             //     route: "/a2p-details-report",
 
             // },
+            {
+                icon: "",
+                label: "Datewise Count",
+                route: "/datewise-count",
+            }
         ],
     },
     // {

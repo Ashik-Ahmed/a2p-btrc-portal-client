@@ -54,9 +54,19 @@ const menuGroups = [
             // },
             {
                 icon: "",
-                label: "Datewise Count",
-                route: "/datewise-count",
-            }
+                label: "Dipping Reports",
+                route: "#",
+                children: [
+                    {
+                        label: "Date-wise Count",
+                        route: "/datewise-count",
+                    },
+                    {
+                        label: "Aggregator-wise Count",
+                        route: "/aggregatorwise-count",
+                    }
+                ],
+            },
         ],
     },
     // {

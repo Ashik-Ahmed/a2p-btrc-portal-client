@@ -22,3 +22,16 @@ export async function getDatewiseCountReport(accessToken, filter) {
     const data = await response.json()
     return data
 }
+
+
+export async function getAggregatorwiseCountReport(accessToken, filter) {
+    console.log(accessToken, filter);
+    const response = await fetch(`${process.env.API_SERVER_URL}/report/aggregatorwiseReport?filter=${JSON.stringify(filter)}`, {
+        cache: 'no-store',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+    })
+    const data = await response.json();
+    return data;
+}

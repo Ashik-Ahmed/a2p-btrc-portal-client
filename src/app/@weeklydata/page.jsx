@@ -31,7 +31,7 @@ const WeeklyData = async () => {
                 <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
                     <div className="flex justify-between mb-3">
                         <div>
-                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">Dipping Today</span>
+                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">Dipping Yesterday</span>
                             <div className="text-900 font-medium text-xl">{formatNumberBD(weeklyData?.data[0]?.total_dipping)}</div>
                         </div>
                         {/* <div className="flex items-center justify-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -39,12 +39,12 @@ const WeeklyData = async () => {
                         </div> */}
                     </div>
                     <span className={`${parseInt(todayDippingChangePercentage) < 0 ? 'text-red' : ' text-green-500'} font-medium`}>{parseInt(todayDippingChangePercentage) > 0 ? '+' : ''}{parseInt(todayDippingChangePercentage)}% </span>
-                    <span className="text-500">than yesterday</span>
+                    <span className="text-500">than previous day</span>
                 </div>
                 <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
                     <div className="flex justify-between mb-3">
                         <div>
-                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">SMS Today</span>
+                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">SMS Yesterday</span>
                             <div className="text-900 font-medium text-xl">{formatNumberBD(weeklyData?.data[0]?.total_sms)}</div>
                         </div>
                         {/* <div className="flex items-center justify-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -52,12 +52,12 @@ const WeeklyData = async () => {
                         </div> */}
                     </div>
                     <span className={`${parseInt(todaySmsChangePercentage) < 0 ? 'text-red' : ' text-green-500'} font-medium`}>{parseInt(todaySmsChangePercentage) > 0 ? '+' : ''}{parseInt(todaySmsChangePercentage)}% </span>
-                    <span className="text-500">than yesterday</span>
+                    <span className="text-500">than previous day</span>
                 </div>
                 <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
                     <div className="flex justify-between mb-3">
                         <div>
-                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">Dipping Yesterday</span>
+                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">Dipping Previous Day</span>
                             <div className="text-900 font-medium text-xl">{formatNumberBD(weeklyData?.data[1]?.total_dipping)}</div>
                         </div>
                         {/* <div className="flex items-center justify-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -65,12 +65,12 @@ const WeeklyData = async () => {
                         </div> */}
                     </div>
                     <span className={`${parseInt(yesterdayDippingChangePercentage) < 0 ? 'text-red' : ' text-green-500'} font-medium`}>{parseInt(yesterdayDippingChangePercentage) > 0 ? '+' : ''}{parseInt(yesterdayDippingChangePercentage)}% </span>
-                    <span className="text-500">since previous day</span>
+                    <span className="text-500">than the day before</span>
                 </div>
                 <div className=" rounded border border-stroke bg-white px-7.5 py-6  group hover:bg-primary hover:text-white hover:scale-105 duration-150">
                     <div className="flex justify-between mb-3">
                         <div>
-                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">SMS Yesterday</span>
+                            <span className="block text-500 text-graydark group-hover:text-white font-medium mb-3">SMS Previous Day</span>
                             <div className="text-900 font-medium text-xl">{formatNumberBD(weeklyData?.data[1]?.total_sms)}</div>
                         </div>
                         {/* <div className="flex items-center justify-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
@@ -78,7 +78,7 @@ const WeeklyData = async () => {
                         </div> */}
                     </div>
                     <span className={`${parseInt(yesterdaySmsChangePercentage) < 0 ? 'text-red' : ' text-green-500'} font-medium`}>{parseInt(yesterdaySmsChangePercentage) > 0 ? '+' : ''}{parseInt(yesterdaySmsChangePercentage)}% </span>
-                    <span className="text-500">since previous day</span>
+                    <span className="text-500">than the day before</span>
                 </div>
             </div>
 

@@ -40,12 +40,6 @@ const menuGroups = [
     {
         name: "REPORTS",
         menuItems: [
-            {
-                icon: "",
-                label: "A2P Summary Report",
-                route: "/a2p-summary-report",
-
-            },
             // {
             //     icon: "",
             //     label: "A2P Details Report",
@@ -67,6 +61,17 @@ const menuGroups = [
                     }
                 ],
             },
+            {
+                icon: "",
+                label: "A2P Summary Report",
+                route: "/a2p-summary-report",
+
+            },
+            {
+                icon: "",
+                label: "MSISDN Search",
+                route: "/msisdn-search",
+            }
         ],
     },
     // {

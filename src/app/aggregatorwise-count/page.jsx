@@ -1,6 +1,6 @@
 import React from 'react';
-import AggregatorwiseCountData from '../components/AggregatorwiseCountData/AggregatorwiseCountData';
 import { auth } from '@/auth';
+import AggregatorwiseCountData from '../components/DippindReports/AggregatorwiseCountData/AggregatorwiseCountData';
 
 const AggregatorwiseCount = async () => {
     const { user } = await auth();

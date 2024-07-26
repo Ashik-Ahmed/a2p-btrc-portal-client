@@ -12,9 +12,8 @@ import formatNumberBD from '@/utils/numberFormat';
 
 
 const DatewiseCountData = ({ accessToken }) => {
-    console.log(accessToken);
-    const { register, control, formState: { errors }, handleSubmit, reset } = useForm();
 
+    const { register, control, formState: { errors }, handleSubmit, reset } = useForm();
 
     const [filterDate, setFilterDate] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -23,11 +22,11 @@ const DatewiseCountData = ({ accessToken }) => {
 
     const getDatewiseCount = async (data) => {
         setLoading(true);
-        // console.log(data);
+
         const filter = { start_date: data?.filterDate[0], end_date: data?.filterDate[1] }
-        console.log(filter);
+
         const datewiseCount = await getDatewiseCountReport(accessToken, filter)
-        console.log(datewiseCount);
+
         if (datewiseCount.status === "Success") {
             setReportData(datewiseCount?.data)
         }

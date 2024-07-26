@@ -58,6 +58,10 @@ const menuGroups = [
                     {
                         label: "Aggregator-wise Count",
                         route: "/aggregatorwise-count",
+                    },
+                    {
+                        label: "ANS-wise report",
+                        route: "/answise-report"
                     }
                 ],
             },

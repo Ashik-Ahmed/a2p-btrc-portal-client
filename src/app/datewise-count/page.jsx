@@ -1,6 +1,6 @@
 import React from 'react'
 import { auth } from '@/auth'
-import DatewiseCountData from '../components/DatewiseCountData/DatewiseCountData';
+import DatewiseCountData from '../components/DippindReports/DatewiseCountData/DatewiseCountData';
 const DatewiseCount = async () => {
 
     const { user } = await auth();

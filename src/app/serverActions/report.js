@@ -35,3 +35,18 @@ export async function getAggregatorwiseCountReport(accessToken, filter) {
     const data = await response.json();
     return data;
 }
+
+
+export async function getMSISDNDetailsReport(accessToken, filter) {
+
+    const response = await fetch(`${process.env.API_SERVER_URL}/detailsReport/msisdn?filter=${JSON.stringify(filter)}`,
+        {
+            cache: 'no-store',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+
+    const data = await response.json();
+    return data;
+}

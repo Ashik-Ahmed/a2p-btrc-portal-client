@@ -1,9 +1,14 @@
+import { auth } from '@/auth';
 import React from 'react';
+import MSISDNDetailsReport from '../components/MSISDNDetailsReport/MSISDNDetailsReport';
 
-const MSISDNSearch = () => {
+const MSISDNSearch = async () => {
+
+    const { user } = await auth();
+
     return (
         <div>
-            <p>MSISDN Search</p>
+            <MSISDNDetailsReport accessToken={user?.accessToken} />
         </div>
     );
 };

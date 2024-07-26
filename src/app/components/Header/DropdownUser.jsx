@@ -9,7 +9,7 @@ import { doLogout } from "@/app/serverActions/authActions";
 import { useRouter } from "next/navigation";
 
 const DropdownUser = ({ session }) => {
-  console.log("session from dropdown user: ", session);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const router = useRouter();

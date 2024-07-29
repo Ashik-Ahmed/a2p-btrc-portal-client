@@ -59,3 +59,23 @@
 .p-paginator .p-paginator-pages .p-paginator-page:hover {
     background-color: #e8e8e9;
 }
+
+/* Styling the search input field within the PrimeReact Dropdown component */
+.p-dropdown .p-dropdown-filter-container input {
+    border: 2px solid #4a90e2;
+    /* Border color */
+    background-color: #1f6fbe;
+    /* Background color */
+    padding: 0.5rem;
+    /* Padding for better appearance */
+    border-radius: 0.25rem;
+    /* Rounded corners */
+    outline: none;
+    /* Remove default outline */
+    transition: border-color 0.3s ease-in-out;
+}
+
+.p-dropdown .p-dropdown-filter-container input:focus {
+    border-color: #2563eb;
+    /* Border color on focus */
+}

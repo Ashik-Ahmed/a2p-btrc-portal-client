@@ -62,6 +62,10 @@ const menuGroups = [
                     {
                         label: "ANS-wise report",
                         route: "/answise-report"
+                    },
+                    {
+                        label: "CLI-wise report",
+                        route: "/cliwise-report"
                     }
                 ],
             },

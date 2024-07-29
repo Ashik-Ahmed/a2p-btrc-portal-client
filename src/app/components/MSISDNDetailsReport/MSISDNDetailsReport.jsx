@@ -77,12 +77,14 @@ const MSISDNDetailsReport = ({ accessToken }) => {
 
                 <DataTable value={msisdnData} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} removableSort
                     emptyMessage="No data found" loading={loading} className="custom-header report-table">
+                    <Column field="delivery_date" header="Delivered" />
                     <Column field="client_id" header="Aggregator" />
                     <Column field="cli" header="CLI" />
                     <Column field="bill_msisdn" header="Bill MSISDN" />
                     <Column field="message_type" header="Message Type" />
                     <Column field="operator" header="ANS Name" />
                     <Column field="ans_business_code" header="ANS Code" />
+                    <Column field="source_ip" header="Source IP" />
                 </DataTable>
             </div>
         </div >

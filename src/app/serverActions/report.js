@@ -61,3 +61,16 @@ export async function getAnswiseCountReport(accessToken, filter) {
     const data = await response.json();
     return data;
 }
+
+export async function getCliwiseCountReport(accessToken, filter) {
+
+    const response = await fetch(`${process.env.API_SERVER_URL}/dippingReport/cliwiseReport?filter=${JSON.stringify(filter)}`, {
+        cache: 'no-store',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+    })
+    const data = await response.json();
+    // console.log(data);
+    return data;
+}

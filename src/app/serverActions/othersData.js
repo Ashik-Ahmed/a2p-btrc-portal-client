@@ -30,5 +30,6 @@ export async function getCliList(accessToken, filter) {
         }
     })
     const data = await response.json()
+    console.log(data);
     return data;
 }

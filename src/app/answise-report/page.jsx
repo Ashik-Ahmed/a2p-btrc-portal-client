@@ -1,9 +1,14 @@
 import React from 'react';
+import AnswiseCountData from '../components/DippindReports/AnswiseCountData/AnswiseCountData';
+import { auth } from '@/auth';
 
-const AnsWiseReport = () => {
+const AnsWiseReport = async () => {
+
+    const { user } = await auth();
+
     return (
         <div>
-            Ans-wise report
+            <AnswiseCountData accessToken={user?.accessToken} />
         </div>
     );
 };

@@ -7,6 +7,9 @@ import Image from 'next/image'
 import logo from '../../../../public/images/Info-Logo.png'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
+import { RiLockPasswordLine } from 'react-icons/ri'
+import { FloatLabel } from 'primereact/floatlabel'
+import { Password } from 'primereact/password'
 
 const LoginForm = () => {
 
@@ -77,6 +80,16 @@ const LoginForm = () => {
                                     <span onClick={() => setPasswordVisibility(!passwordVisibility)} size='small' className="p-inputgroup-addon cursor-pointer bg-primary text-white">  {passwordVisibility ? <i className="pi pi-eye-slash"></i> : <i className="pi pi-eye"></i>}</span>
                                 </div>
                             </div>
+                            {/* <div className="relative">
+                                <FloatLabel>
+                                    <InputText size="small" name="password" id="password" feedback={false} className="w-full p-2 pl-8 border" toggleMask />
+                                    <label htmlFor="client_id" className='absolute left-8'>Pasword</label>
+                                </FloatLabel>
+
+                                <span className="absolute left-1 top-2">
+                                    <RiLockPasswordLine size={22} color={"#a1a1a1"} />
+                                </span>
+                            </div> */}
                         </div>
 
                         <div className="flex items-center justify-between">

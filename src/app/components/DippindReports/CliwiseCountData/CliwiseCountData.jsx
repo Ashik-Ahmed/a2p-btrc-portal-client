@@ -2,6 +2,7 @@
 
 import { getCliList } from '@/app/serverActions/othersData';
 import { getCliwiseCountReport } from '@/app/serverActions/report';
+import formatNumberBD from '@/utils/numberFormat';
 import { Button } from 'primereact/button';
 import { Calendar } from 'primereact/calendar';
 import { Column } from 'primereact/column';
@@ -47,6 +48,19 @@ const CliwiseCountData = ({ accessToken }) => {
     useEffect(() => {
         getCliListData();
     }, []);
+
+
+    const dippingCountBodyTemplate = (rowData) => {
+        return (
+            <span>{formatNumberBD(rowData?.dipping_count)}</span>
+        );
+    }
+
+    const smsCountBodyTemplate = (rowData) => {
+        return (
+            <span>{formatNumberBD(rowData?.sms_count)}</span>
+        );
+    }
 
     return (
         <div>
@@ -128,8 +142,8 @@ const CliwiseCountData = ({ accessToken }) => {
                     <Column field="cli" header="CLI" />
                     <Column field="client_id" header="Aggregator" />
                     <Column field="operator" header="ANS Name" />
-                    <Column field="sms_count" header="SMS Count" sortable />
-                    <Column field="dipping_count" header="Dipping Count" sortable />
+                    <Column body={smsCountBodyTemplate} header="SMS Count" sortable sortField='sms_count' />
+                    <Column body={dippingCountBodyTemplate} header="Dipping Count" sortable sortField='dipping_count' />
                 </DataTable>
             </div>
         </div>

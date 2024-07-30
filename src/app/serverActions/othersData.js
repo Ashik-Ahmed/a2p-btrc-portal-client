@@ -11,8 +11,9 @@ export async function getAggregatorList(accessToken) {
     return data;
 }
 
-export async function getAnsList(accessToken) {
-    const response = await fetch(`${process.env.API_SERVER_URL}/others/ansList`, {
+export async function getAnsList(accessToken, filter) {
+    console.log("Calling ANS List get API", JSON.stringify(filter));
+    const response = await fetch(`${process.env.API_SERVER_URL}/others/ansList?filter=${JSON.stringify(filter)}`, {
         cache: 'no-store',
         headers: {
             'Authorization': `Bearer ${accessToken}`
@@ -30,6 +31,5 @@ export async function getCliList(accessToken, filter) {
         }
     })
     const data = await response.json()
-    console.log(data);
     return data;
 }

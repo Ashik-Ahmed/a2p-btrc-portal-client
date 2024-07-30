@@ -37,6 +37,7 @@ const CliwiseCountData = ({ accessToken }) => {
     }
 
     const getCliListData = async () => {
+        setCliList([]);
         const filter = {}
         const cliList = await getCliList(accessToken, filter);
 
@@ -97,10 +98,10 @@ const CliwiseCountData = ({ accessToken }) => {
                     <FloatLabel className="w-full md:w-56">
                         <Dropdown
                             {...register("cli")}
-                            inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" filter showClear className="border min-w-56" />
+                            inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" filter showClear disabled={!cliList?.length > 0} className="border w-full min-w-56 " />
                         <label htmlFor="cli">CLI</label>
                     </FloatLabel>
-                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded" />
+                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded mt-2 md:mt-0" />
 
                     {/* </div> */}
                 </form>

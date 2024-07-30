@@ -27,15 +27,19 @@ const AnswiseCountData = ({ accessToken }) => {
 
 
     const getANSData = async () => {
-        const ansList = await getAnsList(accessToken);
-        setAnsList(ansList?.data);
+        const filter = { ans_type: selectedAnsType?.ansType }
+        console.log(selectedAnsType);
+        const ansList = await getAnsList(accessToken, filter);
+        if (ansList?.status === "Success") {
+            setAnsList(ansList?.data);
+        }
     }
 
     const getAnswiseCount = async (data) => {
         setReportData([]);
         setLoading(true);
         console.log(selectedAnsType, selectedOperator);
-        const filter = { ans_type: selectedAnsType?.label, operator: selectedOperator?.operator, start_date: data?.filterDate[0], end_date: data?.filterDate[1] }
+        const filter = { ans_type: selectedAnsType?.ansType, operator: selectedOperator?.operator, start_date: data?.filterDate[0], end_date: data?.filterDate[1] }
         console.log(filter);
         const answiseCount = await getAnswiseCountReport(accessToken, filter)
 
@@ -47,7 +51,7 @@ const AnswiseCountData = ({ accessToken }) => {
 
     useEffect(() => {
         getANSData();
-    }, []);
+    }, [selectedAnsType]);
 
     const smsCountBodyTemplate = (rowData) => {
         return (
@@ -94,17 +98,17 @@ const AnswiseCountData = ({ accessToken }) => {
                     <FloatLabel className="w-full md:w-56">
                         <Dropdown
                             {...register("ans_type")}
-                            inputId="ans_type" size="small" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" showClear className="border min-w-56" />
+                            inputId="ans_type" size="small" value={selectedAnsType} onChange={(e) => setSelectedAnsType(e.value)} options={ansTypes} optionLabel="label" showClear className="border w-full min-w-56" />
                         <label htmlFor="ans_type">ANS Type</label>
                     </FloatLabel>
                     <FloatLabel className="w-full md:w-56">
                         <Dropdown
                             {...register("operator")}
-                            inputId="operator" size="small" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={ansList} optionLabel="operator" showClear className="border min-w-56" />
+                            inputId="operator" size="small" value={selectedOperator} onChange={(e) => setSelectedOperator(e.value)} options={ansList} optionLabel="operator" showClear className="border w-full min-w-56" />
                         <label htmlFor="operator">ANS Name</label>
                     </FloatLabel>
 
-                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded" />
+                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 mt-2 md:mt-0 rounded" />
 
                 </form>
             </div>

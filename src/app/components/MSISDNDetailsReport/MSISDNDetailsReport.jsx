@@ -63,10 +63,10 @@ const MSISDNDetailsReport = ({ accessToken }) => {
                     <FloatLabel className="w-full md:w-56">
                         <InputText
                             {...register("msisdn")}
-                            inputId="client_id" size="small" className="border min-w-56 p-2" />
+                            inputId="client_id" size="small" className="border w-full min-w-56 p-2" />
                         <label htmlFor="client_id">MSISDN</label>
                     </FloatLabel>
-                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded ml-6" />
+                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded md:ml-6 mt-2 md:mt-0" />
                 </form>
             </div>
 

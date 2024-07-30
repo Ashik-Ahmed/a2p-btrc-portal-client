@@ -91,11 +91,11 @@ const AggregatorwiseCountData = ({ accessToken }) => {
                     </FloatLabel>
                     <FloatLabel className="w-full md:w-56">
                         <Dropdown
-                            inputId="client_id" size="small" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregatorList} optionLabel="client_id" showClear className="border min-w-56" />
+                            inputId="client_id" size="small" value={selectedAggregator} onChange={(e) => setSelectedAggregator(e.value)} options={aggregatorList} optionLabel="client_id" showClear className="border w-full min-w-56" />
                         <label htmlFor="client_id">Aggregator</label>
                     </FloatLabel>
 
-                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded" />
+                    <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded mt-2 md:mt-0" />
 
                 </form>
             </div>

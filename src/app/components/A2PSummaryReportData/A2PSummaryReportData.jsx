@@ -77,6 +77,13 @@ const A2PSummaryReportData = ({ accessToken }) => {
             </div>
         );
     }
+    const dippingCountBodyTemplate = (rowData) => {
+        return (
+            <div>
+                {formatNumberBD(rowData?.dipping_count)}
+            </div>
+        )
+    }
     const getAggregatorData = async () => {
         const aggregatorList = await getAggregatorList(accessToken);
 
@@ -84,7 +91,9 @@ const A2PSummaryReportData = ({ accessToken }) => {
     }
 
     const getANSData = async () => {
-        const ansList = await getAnsList(accessToken);
+        const filter = { ans_type: selectedAnsType?.ansType }
+        console.log(filter);
+        const ansList = await getAnsList(accessToken, filter);
         setAnsList(ansList?.data);
     }
 
@@ -96,21 +105,24 @@ const A2PSummaryReportData = ({ accessToken }) => {
 
     useEffect(() => {
         getAggregatorData();
-        getANSData();
     }, []);
+
+    // useEffect(() => {
+    //     getANSData();
+    // }, [selectedAnsType]);
 
     useEffect(() => {
         getCliData();
+        getANSData();
     }, [selectedAggregator, selectedAnsType, selectedOperator]);
 
 
     return (
         <div>
-            <div className=' px-4 py-2 my-2 bg-white rounded'>
+            <div className='px-4 py-2 my-2 bg-white rounded'>
                 <h2 className='uppercase text-xl font-light text-graydark'>Filter Options</h2>
                 <form onSubmit={handleSubmit(getSummaryReport)} className='mt-8'>
-
-                    <FloatLabel className="w-1/5 mb-2">
+                    <FloatLabel className="w-full md:w-1/4 mb-2">
                         <Controller
                             name="filterDate"
                             control={control}
@@ -153,7 +165,7 @@ const A2PSummaryReportData = ({ accessToken }) => {
                             <label htmlFor="message_type">Message Type</label>
                         </FloatLabel>
                         <FloatLabel className="w-full">
-                            <Dropdown inputId="cli" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" showClear className="border w-full" />
+                            <Dropdown inputId="cli" size="small" value={selectedCli} onChange={(e) => setSelectedCli(e.value)} options={cliList} optionLabel="cli" showClear className="border w-full" />
                             <label htmlFor="cli">CLI</label>
                         </FloatLabel>
                         <button type='submit' className="bg-sky-500 text-white w-[450px] rounded"> Search </button>
@@ -193,7 +205,7 @@ const A2PSummaryReportData = ({ accessToken }) => {
                 </div>
 
                 <DataTable value={reportData} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
-                    filters={filters} filterDisplay="menu" globalFilterFields={['client_id', 'operator', 'cli', 'billMsisdn']}
+                    filters={filters} filterDisplay="menu" globalFilterFields={['client_id', 'operator', 'cli', 'billMsisdn']} removableSort
                     emptyMessage="No data found" loading={loading} className="custom-header report-table">
                     <Column field="client_id" header="Aggregator" />
                     <Column field="delivery_date" header="Delivery Date" />
@@ -202,8 +214,8 @@ const A2PSummaryReportData = ({ accessToken }) => {
                     <Column field="cli" header="CLI" />
                     <Column field="message_type" header="Message Type" />
                     {/* <Column field="rn_code" header="RN Code" /> */}
-                    <Column body={smsCountBodyTemplate} header="SMS Count" />
-                    <Column field="dipping_count" header="Dipping Count" />
+                    <Column body={smsCountBodyTemplate} header="SMS Count" sortField='sms_count' sortable />
+                    <Column body={dippingCountBodyTemplate} header="Dipping Count" sortField='dipping_count' sortable />
                     <Column field="source_ip" header="Source IP" />
                     {/* <Column field="billMsisdn" header="Bill Msisdn" /> */}
                 </DataTable>

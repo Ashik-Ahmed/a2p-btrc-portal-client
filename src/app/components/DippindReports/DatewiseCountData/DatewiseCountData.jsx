@@ -84,7 +84,7 @@ const DatewiseCountData = ({ accessToken }) => {
 
             <div className='px-4 py-2 bg-white rounded shadow-md'>
                 <div className='flex justify-between items-center mb-2'>
-                    <h1 className='uppercase text-xl font-light text-graydark'>Date-wise Count Report</h1>
+                    <h1 className='uppercase text-xl font-light text-graydark'>Date-wise Count</h1>
                 </div>
 
                 <DataTable value={reportData} size="small" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} removableSort

@@ -52,19 +52,19 @@ const menuGroups = [
                 route: "#",
                 children: [
                     {
-                        label: "Date-wise Count",
+                        label: "Date-wise count",
                         route: "/datewise-count",
                     },
                     {
-                        label: "Aggregator-wise Count",
+                        label: "Aggregator-wise count",
                         route: "/aggregatorwise-count",
                     },
                     {
-                        label: "ANS-wise report",
+                        label: "ANS-wise count",
                         route: "/answise-report"
                     },
                     {
-                        label: "CLI-wise report",
+                        label: "CLI-wise count",
                         route: "/cliwise-report"
                     }
                 ],

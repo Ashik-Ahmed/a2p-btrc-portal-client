@@ -1,7 +1,9 @@
 "use server"
 
+import { API_SERVER_URL } from "../../../config"
+
 export async function getA2PSummaryReport(accessToken, filter) {
-    const response = await fetch(`${process.env.API_SERVER_URL}/report/a2pSummaryReport?filter=${JSON.stringify(filter)}`, {
+    const response = await fetch(`${API_SERVER_URL}/report/a2pSummaryReport?filter=${JSON.stringify(filter)}`, {
         cache: 'no-store',
         headers: {
             'Authorization': `Bearer ${accessToken}`
@@ -13,7 +15,7 @@ export async function getA2PSummaryReport(accessToken, filter) {
 
 export async function getDatewiseCountReport(accessToken, filter) {
 
-    const response = await fetch(`${process.env.API_SERVER_URL}/dippingReport/datewiseReport?filter=${JSON.stringify(filter)}`, {
+    const response = await fetch(`${API_SERVER_URL}/dippingReport/datewiseReport?filter=${JSON.stringify(filter)}`, {
         cache: 'no-store',
         headers: {
             'Authorization': `Bearer ${accessToken}`
@@ -26,7 +28,7 @@ export async function getDatewiseCountReport(accessToken, filter) {
 
 export async function getAggregatorwiseCountReport(accessToken, filter) {
     console.log(accessToken, filter);
-    const response = await fetch(`${process.env.API_SERVER_URL}/dippingReport/aggregatorwiseReport?filter=${JSON.stringify(filter)}`, {
+    const response = await fetch(`${API_SERVER_URL}/dippingReport/aggregatorwiseReport?filter=${JSON.stringify(filter)}`, {
         cache: 'no-store',
         headers: {
             'Authorization': `Bearer ${accessToken}`
@@ -39,7 +41,7 @@ export async function getAggregatorwiseCountReport(accessToken, filter) {
 
 export async function getMSISDNDetailsReport(accessToken, filter) {
 
-    const response = await fetch(`${process.env.API_SERVER_URL}/detailsReport/msisdn?filter=${JSON.stringify(filter)}`,
+    const response = await fetch(`${API_SERVER_URL}/detailsReport/msisdn?filter=${JSON.stringify(filter)}`,
         {
             cache: 'no-store',
             headers: {
@@ -52,7 +54,7 @@ export async function getMSISDNDetailsReport(accessToken, filter) {
 }
 
 export async function getAnswiseCountReport(accessToken, filter) {
-    const response = await fetch(`${process.env.API_SERVER_URL}/dippingReport/answiseReport?filter=${JSON.stringify(filter)}`, {
+    const response = await fetch(`${API_SERVER_URL}/dippingReport/answiseReport?filter=${JSON.stringify(filter)}`, {
         cache: 'no-store',
         headers: {
             'Authorization': `Bearer ${accessToken}`
@@ -64,7 +66,7 @@ export async function getAnswiseCountReport(accessToken, filter) {
 
 export async function getCliwiseCountReport(accessToken, filter) {
 
-    const response = await fetch(`${process.env.API_SERVER_URL}/dippingReport/cliwiseReport?filter=${JSON.stringify(filter)}`, {
+    const response = await fetch(`${API_SERVER_URL}/dippingReport/cliwiseReport?filter=${JSON.stringify(filter)}`, {
         cache: 'no-store',
         headers: {
             'Authorization': `Bearer ${accessToken}`

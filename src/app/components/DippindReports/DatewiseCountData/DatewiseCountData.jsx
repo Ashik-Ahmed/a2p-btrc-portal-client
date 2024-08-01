@@ -79,7 +79,6 @@ const DatewiseCountData = ({ accessToken }) => {
                     <Button type='submit' label='Search' size='small' loading={loading} className="bg-sky-500 text-white w-full md:w-fit p-2 rounded" />
 
                 </form>
-
             </div>
 
             <div className='px-4 py-2 bg-white rounded shadow-md'>

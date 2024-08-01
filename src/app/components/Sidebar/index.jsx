@@ -9,7 +9,6 @@ import ClickOutside from "../ClickOutside/ClickOutside";
 import fullLogo from "../../../../public/images/Info-Logo.png";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-
 const menuGroups = [
     {
         name: "MENU",

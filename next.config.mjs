@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
 
+const nextConfig = {
     images: {
         remotePatterns: [
             {
@@ -16,10 +16,6 @@ const nextConfig = {
                 hostname: 'media.licdn.com'
             }
         ]
-    },
-    publicRuntimeConfig: {
-        AUTH_URL: process.env.NODE_ENV === 'development' ? process.env.AUTH_URL : process.env.PUBLIC_AUTH_URL,
-        API_SERVER_URL: process.env.NODE_ENV === 'development' ? process.env.API_SERVER_URL : process.env.PUBLIC_API_SERVER_URL,
     },
 };
 

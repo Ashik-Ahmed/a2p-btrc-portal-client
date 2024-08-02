@@ -64,7 +64,7 @@ const DatewiseCountData = ({ accessToken }) => {
                                         setFilterDate(e.value);
                                         field.onChange(e.value);
                                     }}
-                                    minDate={new Date(new Date(2024, 3, 1))}
+                                    minDate={new Date(new Date(2024, 3, 1))} // Months are 0-based in JavaScript Date
                                     maxDate={new Date()}
                                     showButtonBar
                                     selectionMode="range"

@@ -74,10 +74,15 @@ const menuGroups = [
                 route: "/a2p-summary-report",
 
             },
+            // {
+            //     icon: "",
+            //     label: "MSISDN Search",
+            //     route: "/msisdn-search",
+            // },
             {
                 icon: "",
-                label: "MSISDN Search",
-                route: "/msisdn-search",
+                label: "CLI Summary Report",
+                route: "/cli-summary-report",
             }
         ],
     },

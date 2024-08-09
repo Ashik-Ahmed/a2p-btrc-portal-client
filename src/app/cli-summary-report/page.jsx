@@ -2,14 +2,14 @@ import { auth } from '@/auth';
 import React from 'react';
 import CliSummaryReportData from '../components/CliReport/CliSummaryReportData';
 
-const CliSummaryReport = () => {
+const CliSummaryReport = async () => {
 
-    const { user } = auth();
+    const { user } = await auth();
 
     return (
         <div>
             <h1>Cli Report</h1>
-            <CliSummaryReportData />
+            <CliSummaryReportData user={user} />
         </div>
     );
 };
